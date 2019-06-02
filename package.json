@@ -1,0 +1,27 @@
+{
+  "name": "forkio",
+  "version": "1.0.0",
+  "description": "Food cooking app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/optmzer/forkio.git"
+  },
+  "keywords": [
+    "recepie",
+    "food",
+    "tasty"
+  ],
+  "author": "Alexander Frolov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/optmzer/forkio/issues"
+  },
+  "homepage": "https://github.com/optmzer/forkio#readme",
+  "devDependencies": {
+    "webpack": "^4.32.2"
+  }
+}
