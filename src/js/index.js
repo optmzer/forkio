@@ -26,6 +26,7 @@ form.addEventListener('submit', (e) => {
     console.log("Form => ", e);
 
     const res = new SearchModel().getAlbums("Dunedin");
+    console.log("L29 index response => ", res);
     res.then(r => console.log("Result => ", r.data.city));
 });
 
