@@ -21,12 +21,20 @@ const DOMstr = {
 }
 
 let form = document.querySelector(DOMstr.search_input);
+let formData = new FormData(form);
+let formValues = [];
+
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     console.log("Form => ", e);
-
+    if(form.reportValidity()){
+        for (const entry of data.entries()) {
+            formValues.push(entry);
+        }
+        console.log("Form value => ", formValues);
+    }
     const res = new SearchModel().getAlbums("Dunedin");
     console.log("L29 index response => ", res);
-    res.then(r => console.log("Result => ", r.data.city));
+    res.then(r => console.log("Result => ", r));
 });
 

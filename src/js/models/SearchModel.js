@@ -14,6 +14,8 @@ export default class SearchModel{
     
     async getAlbums(city){
         // Country code is desirable by manual but will work without it as well
+        
+        console("L18 SearchModel Env => ", process.env);
         let res;
         try {
             res = await axios(`${process.env.OPEN_WEATHER_API_CITY_SEARCH}?q=${city}&appid=${process.env.OPEN_WEATHER_API_KEY}`);
