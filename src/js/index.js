@@ -1,7 +1,6 @@
 // Global App Controller
 import SearchModel from './models/SearchModel';
 
-
 /**
  * Global App State
  * State is stored in localStorage
@@ -12,29 +11,37 @@ import SearchModel from './models/SearchModel';
  */
 
 const state = {
-
+    searchQuery: ""
 };
-
 
 const DOMstr = {
     search_input: ".search"
 }
 
 let form = document.querySelector(DOMstr.search_input);
-let formData = new FormData(form);
-let formValues = [];
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    console.log("Form => ", e);
+    console.log("process.env.MOCKUP_ENV_VAR => ", process.env.MOCKUP_ENV_VAR);
+
+    let formData = new FormData(e.target);
+    let formValues = [];
     if(form.reportValidity()){
-        for (const entry of data.entries()) {
+        for (const entry of formData.entries()) {
             formValues.push(entry);
         }
-        console.log("Form value => ", formValues);
+        state.searchQuery = formValues[0][1];
     }
-    const res = new SearchModel().getAlbums("Dunedin");
-    console.log("L29 index response => ", res);
-    res.then(r => console.log("Result => ", r));
+    try {
+        console.log("Input => ", state.searchQuery);
+
+        const res = new SearchModel().getAlbums(state.searchQuery);
+        res.then(r => console.log("Result => ", r.data.city ? r.data.city.name : "no data"));
+    } catch (error) {
+        console.log("L42 index.js => ", error);
+    } finally{
+        form.reset();
+        state.searchQuery = "";
+    }
 });
 
