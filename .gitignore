@@ -1,10 +1,13 @@
 # node_modules
 node_modules
+
 # webpack distribution
 dist
+
 # Ignore any file with name SECRET in it
 # Like USER_SECRETS.js
 **/*SECRET*
+.env
 
 #amplify
 amplify/\#current-cloud-backend

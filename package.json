@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "start": "webpack && webpack-dev-server --mode development --open",
+    "start": "webpack --mode development && webpack-dev-server --mode development --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -36,6 +36,7 @@
   "dependencies": {
     "aws-amplify": "^1.1.28",
     "axios": "^0.19.0",
-    "babel-polyfill": "^6.26.0"
+    "babel-polyfill": "^6.26.0",
+    "dotenv-webpack": "^1.7.0"
   }
 }

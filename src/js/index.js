@@ -1,6 +1,7 @@
 // Global App Controller
 import SearchModel from './models/SearchModel';
 
+
 /**
  * Global App State
  * State is stored in localStorage
@@ -10,6 +11,21 @@ import SearchModel from './models/SearchModel';
  * - Liked Object
  */
 
+const state = {
 
-const res = new SearchModel().getAlbums("Dunedin");
-res.then(r => console.log("Result => ", r.data.city));
+};
+
+
+const DOMstr = {
+    search_input: ".search"
+}
+
+let form = document.querySelector(DOMstr.search_input);
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    console.log("Form => ", e);
+
+    const res = new SearchModel().getAlbums("Dunedin");
+    res.then(r => console.log("Result => ", r.data.city));
+});
+
