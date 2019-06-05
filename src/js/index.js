@@ -1,5 +1,10 @@
 // Global App Controller
 import SearchModel from './models/SearchModel';
+// import '../style.css'; // created main.css
+import '../sass/main.scss'; // Created main.css
+
+
+
 
 /**
  * Global App State
@@ -23,6 +28,8 @@ let form = document.querySelector(DOMstr.search_input);
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     console.log("process.env.MOCKUP_ENV_VAR => ", process.env.MOCKUP_ENV_VAR);
+    // console.log("process.env => ", process.env);
+
 
     let formData = new FormData(e.target);
     let formValues = [];

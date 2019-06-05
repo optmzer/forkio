@@ -4,9 +4,10 @@ const path = require('path');
 // Plug ins
 const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+    target: 'node',
     entry: ['babel-polyfill', './src/js/index.js'],
     output: {
         path: path.resolve(__dirname, 'dist/'),
@@ -16,14 +17,15 @@ module.exports = {
         contentBase: './dist'
     },
     plugins: [
+        new Dotenv(),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: './src/index.html'
         }),
-        new Dotenv({
-            path: './.env', // Path to .env file (this is the default)
-            safe: true // load .env.example (defaults to "false" which does not use dotenv-safe)
-          })
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+            chunkFilename: '[id].css'
+        })
     ],
     module: {
         rules: [
@@ -33,6 +35,16 @@ module.exports = {
                 use: {
                     loader: 'babel-loader'
                 }
+            },
+            {
+                test: /\.(sa|sc|c)ss$/,
+                exclude: /node_modules/,
+                use: [
+                    'style-loader',
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'sass-loader'
+                ]
             }
         ]
     }
