@@ -10,6 +10,16 @@ html{
     font-size: 62.5%;
     box-sizing: border-box;
     font-family: 'Nunito Sans', sans-serif;
-    background-color: yellow;
+    background-color: rgb(233, 233, 233);
 }
 
+button{
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+input{
+    font-size: inherit;
+    font-family: inherit;
+}
