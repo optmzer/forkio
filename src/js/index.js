@@ -1,8 +1,8 @@
 // Global App Controller
-import SearchModel from './models/SearchModel';
-// import '../style.css'; // created main.css
 import '../sass/main.scss'; // Created main.css
-
+import SearchModel from './models/SearchModel';
+import * as searchView from './views/SearchView';
+import {elements} from './views/base';
 
 
 
@@ -16,39 +16,28 @@ import '../sass/main.scss'; // Created main.css
  */
 
 const state = {
-    searchQuery: ""
+    search: {}
 };
 
-const DOMstr = {
-    search_input: ".search"
+let form = searchView.getForm;
+
+const searchControl = () => {
+    const query = searchView.getSearchQuery();
+
+    if(query){
+        state.search = new SearchModel(query);
+        //show loader
+
+        state.search.getAlbums(query); //getSearch results
+        form.reset(); //reset the form
+    }
 }
 
-let form = document.querySelector(DOMstr.search_input);
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     console.log("process.env.MOCKUP_ENV_VAR => ", process.env.MOCKUP_ENV_VAR);
     // console.log("process.env => ", process.env);
-
-
-    let formData = new FormData(e.target);
-    let formValues = [];
-    if(form.reportValidity()){
-        for (const entry of formData.entries()) {
-            formValues.push(entry);
-        }
-        state.searchQuery = formValues[0][1];
-    }
-    try {
-        console.log("Input => ", state.searchQuery);
-
-        const res = new SearchModel().getAlbums(state.searchQuery);
-        res.then(r => console.log("Result => ", r.data.city ? r.data.city.name : "no data"));
-    } catch (error) {
-        console.log("L42 index.js => ", error);
-    } finally{
-        form.reset();
-        state.searchQuery = "";
-    }
+    searchControl();
 });
 
