@@ -1,0 +1,40 @@
+.search-results{
+    padding: 1rem;
+
+    .list{
+        
+        // ul{ }
+    
+        &__item{
+            display: flex;
+            align-items: center;
+            background-color: aqua;
+            border-radius: 3px;
+            transition: all .2s;
+
+            &:not(:last-child){
+                margin-bottom: 1rem;
+            }
+            
+            &-icon{
+                width: 5rem;
+                height: 7rem;
+                margin: 0 .5rem;
+            }
+
+            &-stats{
+                margin-right: .5rem;
+            }
+
+            &:hover{
+                transform: translateY(-3px);
+                box-shadow: 0 3px 4px rgba(0,0,0, .2);
+            }
+
+            &:active{
+                transform: translateY(0);
+                box-shadow: none;
+            }
+        }
+    }
+}

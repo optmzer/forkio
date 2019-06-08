@@ -13,6 +13,16 @@ html{
     background-color: rgb(233, 233, 233);
 }
 
+ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li{
+        cursor: pointer;
+    }
+}
+
 button{
     border: none;
     background: transparent;
@@ -22,4 +32,22 @@ button{
 input{
     font-size: inherit;
     font-family: inherit;
+}
+
+// ======== LAYOUT ==============
+
+.container{
+    display: grid;
+    grid-template-rows: min-content 1fr;
+    height: 100vh;
+
+    // .header{ }
+
+    .content{
+        display: grid;
+        grid-template-columns: minmax(max-content, 21%) minmax(min-content, 1fr);
+
+        .search-results{ background-color: burlywood }
+        .info{ background-color: coral }
+    }
 }

@@ -1,12 +1,19 @@
 .header{
+    height: 6rem;
+    display: flex;
+    align-items: center;
     font-size: 2rem;
+    background-color: #666;
 
     .logo{
+
         width: 2rem;
         height: 2rem;
     }
 
     .search{
+        margin: 0 auto;
+
         &__field{
             padding: .5rem 2rem;
             border: none;
@@ -17,13 +24,24 @@
             border-radius: 100px;
             width: 6rem;
             height: 3rem;
-            background-color: rgb(184, 184, 184)
+            background-color: rgb(184, 184, 184);
+
+            &:hover {
+                background-color: rgba(184, 184, 184, .8);
+            }
         }
+
 
         &__icon{
             width: 2rem;
             height: 2rem;
             fill: #666;
         }
+    }
+
+    .likes{
+        height: 100%;
+        flex: 0 0 14rem;
+        background-color: aqua;
     }
 }

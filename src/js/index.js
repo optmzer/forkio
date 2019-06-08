@@ -25,11 +25,14 @@ const searchControl = () => {
     const query = searchView.getSearchQuery();
 
     if(query){
-        state.search = new SearchModel(query);
+        searchView.clearSearchResultList();
         //show loader
 
+        state.search = new SearchModel(query);
         state.search.getAlbums(query); //getSearch results
         form.reset(); //reset the form
+
+        console.log("index state.search.result => ", state.search.result);
     }
 }
 

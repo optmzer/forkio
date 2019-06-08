@@ -20,4 +20,6 @@ export const getSearchQuery = () => {
     return query;
 }
 
- 
+export const clearSearchResultList = () => {
+    elements.searchResultList.innerHTML = "";
+}
