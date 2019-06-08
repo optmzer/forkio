@@ -48,6 +48,15 @@ input{
         grid-template-columns: minmax(max-content, 21%) minmax(min-content, 1fr);
 
         .search-results{ background-color: burlywood }
-        .info{ background-color: coral }
+
+        .info{ 
+            display: grid;
+            grid-template-rows: max-content minmax(max-content, 1fr);
+            grid-row-gap: 1rem;
+
+            // &-gallery{ }
+            // &-info{ }
+            // &-cast{ }
+        }
     }
 }

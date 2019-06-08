@@ -1,0 +1,15 @@
+.section-header{
+    display: grid;
+    grid-template-columns: 13% max-content 1fr;
+    grid-gap: 1rem;
+    align-items: center;
+    color: #eee;
+    text-transform: uppercase;
+
+    &::before,
+    &::after{
+        content: "";
+        height: 2px;
+        background-color: currentColor;
+    }
+}

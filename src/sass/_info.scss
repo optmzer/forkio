@@ -1,5 +1,45 @@
 .info{
+    background-color: #111;
+    padding: 1rem;
 
+    .hlts{ 
+        display: grid;
+        grid-template-columns: min-content 1fr;
 
-    .cast{ background-color: cornflowerblue}
+        &__poster{ 
+            display: contents;
+            &-img{
+                width: 20rem;
+            }
+        }
+
+        &-meta{
+            padding: 1rem;
+            color: #eee;
+
+            &__movie-title{
+                display: grid;
+                grid-template-columns: 1fr max-content 1fr;
+                grid-gap: 1rem;
+                align-items: center;
+
+                font-size: 2rem;
+                color: currentColor;
+
+                &::before,
+                &::after{
+                    content: "";
+                    height: 2px;
+                    background-color: currentColor;
+                }
+            }
+            // &__director{}
+            // &__release-date{}
+            // &__catch-phrase{ }
+            // &__ratings{ }
+        }
+    }
+
+    // &-gallery{  }
+    // &-cast{ }
 }
