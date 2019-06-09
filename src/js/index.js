@@ -29,7 +29,7 @@ const searchControl = () => {
         searchView.clearSearchResultList();
         //show loader
 
-        state.search = new SearchModel();
+        // state.search = new SearchModel();
         state.search.getBooks(query)
             .then(res => {
                 state.volumeData = res;
@@ -51,3 +51,20 @@ form.addEventListener('submit', (e) => {
     searchControl();
 });
 
+const init = (query) => {
+    searchView.clearSearchResultList();
+        //show loader
+
+    state.search = new SearchModel();
+    state.search.getBooks(query)
+        .then(res => {
+            state.volumeData = res;
+            console.log("L36 state.volumeData => ", res);
+            if(res.data.items.length > 0){
+                searchView.populateSearchList(res.data.items);
+            } 
+        }); //getSearch results
+    form.reset(); //reset the form
+}
+
+init("best seller 2019");

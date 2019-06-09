@@ -1,4 +1,5 @@
 import {elements} from './base';
+import * as Utils from '../models/Utils';
 
 // ======== EXPORTS ===========
 export const getForm = elements.searchForm;
@@ -25,21 +26,22 @@ export const clearSearchResultList = () => {
 }
 
 const renderListItem = (item) => {
+    let authors = Utils.buildStringFromArr(item.volumeInfo.authors);
     return `
-        <li id="${item.accessInfo.id}" class="list__item">
+        <li id="${item.id}" class="list__item">
             <img class="list__item-icon" src="${item.volumeInfo.imageLinks.smallThumbnail}">
             <div class="list__item-stats">
                 <h3 class="list__item-title">${item.volumeInfo.title}</h3>
-                <p class="list__item-genre">${item.volumeInfo.authors[0]}</p>
+                <p class="list__item-genre">${authors}</p>
                 <p class="list__item-ratings">${item.volumeInfo.averageRating ? item.volumeInfo.averageRating : "not rated"}</p>
             </div>
         </li>
     `;
 }
 
+
 export const populateSearchList = (items) => {
-    console.log("L41 SearchView items => ", items);
-    console.log("SearchResultList => ", elements.searchResultList);
+    // console.log("L41 SearchView items => ", items);
     let searchResultList = elements.searchResultList; 
     if(items.length > 0){
         for (const item of items) {

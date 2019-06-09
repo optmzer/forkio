@@ -14,9 +14,8 @@ export default class SearchModel{
     async getBooks(query){
         // Country code is desirable by manual but will work without it as well
         let res = null;
-
         try{
-            res = await axios(`${GoogleApi.volume}?q=${query}`);
+            res = await axios(`${GoogleApi.volume}?q=${query.replace(/ /g, "+")}`);
             // console.log("res => ", res.status === 200 ? res.data : res.statusText);
             // console.log("Result => ", res.data.items.length > 0 ? res.data.items : res);
         }catch(err){
