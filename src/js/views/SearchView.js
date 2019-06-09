@@ -27,11 +27,14 @@ export const clearSearchResultList = () => {
 
 const renderListItem = (item) => {
     let authors = Utils.buildStringFromArr(item.volumeInfo.authors);
+    let thumbnail = item.volumeInfo.imageLinks !== undefined ? item.volumeInfo.imageLinks.smallThumbnail : "default";
+    let title = item.volumeInfo.title.replace(/"/g, ""); // remove quotes.
+    
     return `
         <li id="${item.id}" class="list__item">
-            <img class="list__item-icon" src="${item.volumeInfo.imageLinks.smallThumbnail}">
+            <img class="list__item-icon" src="${thumbnail}" alt="frontcover for ${title}">
             <div class="list__item-stats">
-                <h3 class="list__item-title">${item.volumeInfo.title}</h3>
+                <h3 class="list__item-title">${title}</h3>
                 <p class="list__item-genre">${authors}</p>
                 <p class="list__item-ratings">${item.volumeInfo.averageRating ? item.volumeInfo.averageRating : "not rated"}</p>
             </div>
@@ -45,7 +48,7 @@ export const populateSearchList = (items) => {
     let searchResultList = elements.searchResultList; 
     if(items.length > 0){
         for (const item of items) {
-            searchResultList.insertAdjacentHTML("afterbegin", renderListItem(item));
+            searchResultList.insertAdjacentHTML("beforeend", renderListItem(item));
         }
     }
 }
