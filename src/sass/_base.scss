@@ -45,9 +45,11 @@ input{
 
     .content{
         display: grid;
-        grid-template-columns: minmax(max-content, 21%) minmax(min-content, 1fr);
+        grid-template-columns: minmax(max-content, 25%) minmax(min-content, 1fr);
 
-        .search-results{ background-color: burlywood }
+        .search-results{ 
+            background-color: burlywood;
+        }
 
         .info{ 
             display: grid;
@@ -58,5 +60,17 @@ input{
             // &-info{ }
             // &-cast{ }
         }
+    }
+}
+
+.clickable{
+    &:hover{
+        transform: translateY(-3px);
+        box-shadow: 0 3px 4px rgba(0,0,0, .2);
+    }
+
+    &:active{
+        transform: translateY(0);
+        box-shadow: none;
     }
 }

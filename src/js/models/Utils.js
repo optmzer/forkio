@@ -24,3 +24,10 @@ export const buildStringFromArr = (arr) => {
     }
     return result;
 }
+
+export const shortenTitle = (title, titleLength = 32) => {
+    if(title.length > titleLength){
+        return title.slice(0, titleLength) + "...";
+    } 
+    return title;
+}
