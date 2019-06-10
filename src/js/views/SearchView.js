@@ -53,13 +53,18 @@ export const populateSearchList = (items, page = 0, perPage = 5) => {
             searchResultList.insertAdjacentHTML("beforeend", renderListItem(item));
         }
     }
+
+    renderPaginationButtons(page, items.length, perPage);
 }
 
-export const renderPaginationButtons = (page, numRes, perPage) => {
+const renderPaginationButtons = (page, numRes, perPage) => {
+
     const totalPages = Math.ceil(numRes / perPage);
     // render left and right button
     let left = false;
     let right = false;
+    let prevId = page - 1 > 0 ? page - 1 : 0;
+    let nextId = page + 1 > totalPages ? totalPages : page + 1;
     if(page === 0){
         //only right is displayed
         right = true;
@@ -76,7 +81,13 @@ export const renderPaginationButtons = (page, numRes, perPage) => {
         left = true;
     }
 
-    return `
-
+    elements.pagination.innerHTML = ""; // clear what was before
+    //render new ones
+    let buttons = `
+        <button id="${prevId}" class="btn pagination-btn left clickable" ${!left && "disabled"}>&lt;</button>
+        <button class="btn pagination-btn center" disabled>${page + 1} of ${totalPages}</button>
+        <button id="${nextId}" class="btn pagination-btn right clickable" ${!right && "disabled"}>&gt;</button>
     `;
+
+    elements.pagination.insertAdjacentHTML('afterbegin', buttons);
 }
