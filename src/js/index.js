@@ -3,7 +3,7 @@ import '../sass/main.scss'; // Created main.css
 import SearchModel from './models/SearchModel';
 import * as searchView from './views/SearchView';
 import * as Highlights from './views/HighlightsView';
-import {elements} from './views/base';
+import {elements, renderSpinner} from './views/base';
 
 
 
@@ -24,6 +24,8 @@ const state = {
 const form = searchView.getForm;
 
 const searchControl = (query = "") => {
+    renderSpinner(elements.searchResultList);
+
     if(query === ""){
         // if no params get query from form
         query = searchView.getSearchQuery();
@@ -31,11 +33,12 @@ const searchControl = (query = "") => {
     
     // if there still no query do nothing
     if(query){
-        searchView.clearSearchResultList();
         //show loader
-    
+        
         state.search.getBooks(query)
             .then(res => {
+                searchView.clearSearchResultList();
+
                 state.volumeData = res;
                 console.log("L36 state.volumeData => ", res);
                 if(res.data.items.length > 0){
@@ -58,6 +61,7 @@ const init = (query) => {
         console.log("process.env.MOCKUP_ENV_VAR => ", process.env.MOCKUP_ENV_VAR);
         // console.log("process.env => ", process.env);
         // show spinner while search is fetching data and populating search list
+
         searchControl();
     });
 
