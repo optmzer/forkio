@@ -32,7 +32,7 @@ const renderListItem = (item) => {
     let title = item.volumeInfo.title.replace(/"/g, ""); // remove quotes.
     
     return `
-        <li id="${item.id}" class="list__item clickable">
+        <li id="${item.id}" class="list__item clickable" data-bookidtoshow="${item.id}">
             <img class="list__item-icon" src="${thumbnail}" alt="Cover for ${Utils.shortenTitle(title)}">
             <div class="list__item-stats">
                 <h3 class="list__item-title">${Utils.shortenTitle(title)}</h3>
@@ -43,7 +43,7 @@ const renderListItem = (item) => {
     `;
 }
 
-export const populateSearchList = (items, page = 0, perPage = 5) => {
+export const populateSearchList = (items, page = 0, perPage = 3) => {
     // console.log("L41 SearchView items => ", items);
     let searchResultList = elements.searchResultList; 
     let start = page * perPage;
@@ -52,41 +52,47 @@ export const populateSearchList = (items, page = 0, perPage = 5) => {
         for (const item of items.slice(start, stop)) {
             searchResultList.insertAdjacentHTML("beforeend", renderListItem(item));
         }
+        renderPaginationButtons(page, items.length, perPage);
     }
-
-    renderPaginationButtons(page, items.length, perPage);
 }
 
 const renderPaginationButtons = (page, numRes, perPage) => {
-
+    // data from DOM returned as a string
+    page = typeof page === "number" ? page : parseInt(page);
+    
     const totalPages = Math.ceil(numRes / perPage);
-    // render left and right button
-    let left = false;
-    let right = false;
-    let prevId = page - 1 > 0 ? page - 1 : 0;
-    let nextId = page + 1 > totalPages ? totalPages : page + 1;
-    if(page === 0){
-        //only right is displayed
-        right = true;
-    }
+    let left = "disabled";
+    let right = "disabled";
+    // totalPages - 1 because my initial page == 0
+    let prevId = (page - 1) <= 0 ? 0 : page - 1; // should not be < 0
+    let nextId = page === totalPages - 1 ? totalPages - 1 : page + 1;
+    // console.log(`Page => ${page}, TotalPages =>  ${totalPages}, prevId => ${prevId}, nextId => ${nextId} `);
 
-    if(page > 0 && page < totalPages){
-        // both buttons are displayed
-        left = true;
-        right = true;
-    }
+    if(numRes !== perPage){ // more then 1 page to display
+        if(page === 0 && totalPages > 1){
+            //only right is disabled
+            right = "";
+        }
 
-    if(page === totalPages){
-        // only left button is displayed
-        left = true;
-    }
+        if(page > 0 && page < totalPages){
+            // both buttons are disabled
+            left = "";
+            right = "";
+        }
 
-    elements.pagination.innerHTML = ""; // clear what was before
+        if(page === totalPages - 1){
+            // only left button is disabled
+            left = "";
+            right = "disabled";
+        }
+    }
+    // clear what was before
+    elements.pagination.innerHTML = ""; 
     //render new ones
     let buttons = `
-        <button id="${prevId}" class="btn pagination-btn left clickable" ${!left && "disabled"}>&lt;</button>
-        <button class="btn pagination-btn center" disabled>${page + 1} of ${totalPages}</button>
-        <button id="${nextId}" class="btn pagination-btn right clickable" ${!right && "disabled"}>&gt;</button>
+        <button id="gotoPrev" data-gotopage="${prevId}" class="btn pagination-btn ${left !== "disabled" ? "clickable" : "dead"}" ${left}>&lt;</button>
+        <button class="btn pagination-btn dead" disabled>page ${page + 1} of ${totalPages}</button>
+        <button id="gotoNext" data-gotopage="${nextId}" class="btn pagination-btn ${right !== "disabled"  ? "clickable" : "dead"}" ${right}>&gt;</button>
     `;
 
     elements.pagination.insertAdjacentHTML('afterbegin', buttons);

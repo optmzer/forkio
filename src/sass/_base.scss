@@ -63,7 +63,7 @@ input{
     }
 }
 
-.clickable{
+.clickable {
     &:hover{
         transform: translateY(-3px);
         box-shadow: 0 3px 4px rgba(0,0,0, .2);
@@ -73,4 +73,10 @@ input{
         transform: translateY(0);
         box-shadow: none;
     }
+}
+
+.dead {
+    background-color: rgb(156, 156, 156);
+    color:  rgb(92, 91, 91);
+    cursor: initial;
 }

@@ -17,8 +17,8 @@ import {elements, renderSpinner} from './views/base';
  */
 
 const state = {
-    search: {},
-    volumeData: {}
+    search: {}, // SearchModel
+    volumeData: {} // Response
 };
 
 const form = searchView.getForm;
@@ -40,7 +40,7 @@ const searchControl = (query = "") => {
                 searchView.clearSearchResultList();
 
                 state.volumeData = res;
-                console.log("L36 state.volumeData => ", res);
+                // console.log("L36 state.volumeData => ", res);
                 if(res.data.items.length > 0){
                     searchView.populateSearchList(res.data.items);
                     // show first book in the list
@@ -63,6 +63,25 @@ const init = (query) => {
         // show spinner while search is fetching data and populating search list
 
         searchControl();
+    });
+
+    elements.searchResultDiv.addEventListener('click', (e) => {
+        const li = e.target.closest("li.list__item");
+        const paginationBtn = e.target.closest(".pagination-btn");
+
+        if (paginationBtn) {
+            const gotopage = paginationBtn.dataset.gotopage;
+            searchView.clearSearchResultList();
+            searchView.populateSearchList(state.volumeData.data.items, gotopage);
+        }
+
+        if (li){
+            // TODO: get it from API rother then from state.volumeData
+            const bookId = li.dataset.bookidtoshow;
+            const book = state.volumeData.data.items.find(item => item.id === bookId);
+            Highlights.clearBookHighlights();
+            Highlights.renderBookHighlights(book);
+        }
     });
 
     searchControl(query);

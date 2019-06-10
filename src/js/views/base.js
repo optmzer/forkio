@@ -1,10 +1,12 @@
 export const elements = {
     searchForm: document.querySelector(".search"),
+    searchResultDiv: document.querySelector(".search-results"),
     searchResultList: document.querySelector(".search-results > .list"), // TODO: left panel
     bookHighlights: document.querySelector(".hlts"),
     sectionContent: document.querySelector(".section-content"),
     pagination: document.querySelector(".pagination")
 };
+
 
 /**
  * Spinner - Loader attaches itself to a parent element
