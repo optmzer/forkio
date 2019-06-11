@@ -3,7 +3,8 @@ export const elements = {
     searchResultDiv: document.querySelector(".search-results"),
     searchResultList: document.querySelector(".search-results > .list"), // TODO: left panel
     bookHighlights: document.querySelector(".hlts"),
-    sectionContent: document.querySelector(".section-content"),
+    infoDescriptionContent: document.querySelector(".info-description-content"),
+    infoRecommendations: document.querySelector(".info-recommendations"),
     pagination: document.querySelector(".pagination")
 };
 
@@ -27,3 +28,11 @@ export const renderSpinner = (parent) => {
 
     parent.insertAdjacentHTML('afterbegin', spinner);
 };
+
+/**
+ * Clears HTMLElement from its content
+ * @param {htmlElement} element 
+ */
+export const clearHtmlElement = (element) => {
+    element.innerHTML = "";
+}

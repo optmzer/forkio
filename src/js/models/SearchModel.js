@@ -2,8 +2,6 @@ import axios from 'axios';
 import * as GoogleApi from './GoogleApi';
 import * as Utils from './Utils';
 
-//https://www.googleapis.com/books/v1/volumes?q=top+sellers+2019
-// HOWTO: https://developers.google.com/books/docs/v1/using
 
 export default class SearchModel{
     constructor(){
@@ -15,7 +13,7 @@ export default class SearchModel{
         // Country code is desirable by manual but will work without it as well
         let res = null;
         try{
-            res = await axios(`${GoogleApi.VOLUME}?q=${query.replace(/ /g, "+")}`);
+            res = await axios(`${GoogleApi.VOLUMES}?q=${query.replace(/ /g, "+")}`);
             // console.log("res => ", res.status === 200 ? res.data : res.statusText);
             // console.log("Result => ", res.data.items.length > 0 ? res.data.items : res);
         }catch(err){
@@ -39,6 +37,5 @@ export default class SearchModel{
         //     console.log("L42 index.js => ", error);
         // } 
     }
-
     
 }

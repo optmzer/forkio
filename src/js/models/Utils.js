@@ -1,5 +1,9 @@
-export const logError = (err) => {
-    console.log("Error Message => ", err);
+export const logError = (message, err) => {
+    console.log(`${message}, err=> `, err);
+}
+
+export const logOutput = (message, output) => {
+    console.log(`${message}, `, output);
 }
 
 export const buildStringFromArr = (arr) => {

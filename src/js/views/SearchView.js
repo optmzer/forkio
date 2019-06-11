@@ -22,10 +22,6 @@ export const getSearchQuery = () => {
     return query;
 }
 
-export const clearSearchResultList = () => {
-    elements.searchResultList.innerHTML = "";
-}
-
 const renderListItem = (item) => {
     let authors = Utils.buildStringFromArr(item.volumeInfo.authors);
     let thumbnail = item.volumeInfo.imageLinks !== undefined ? item.volumeInfo.imageLinks.smallThumbnail : "default";
