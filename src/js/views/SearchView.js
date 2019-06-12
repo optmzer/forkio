@@ -28,13 +28,15 @@ const renderListItem = (item) => {
     let title = item.volumeInfo.title.replace(/"/g, ""); // remove quotes.
     
     return `
-        <li id="${item.id}" class="list__item clickable" data-bookidtoshow="${item.id}">
-            <img class="list__item-icon" src="${thumbnail}" alt="Cover for ${Utils.shortenTitle(title)}">
-            <div class="list__item-stats">
-                <h3 class="list__item-title">${Utils.shortenTitle(title)}</h3>
-                <p class="list__item-genre">${authors}</p>
-                <p class="list__item-ratings">${item.volumeInfo.averageRating ? item.volumeInfo.averageRating : "not rated"}</p>
-            </div>
+        <li id="${item.id}"  class="list__item clickable" data-bookidtoshow="${item.id}">
+            <a href="/#${item.id}">
+                <img class="list__item-icon" src="${thumbnail}" alt="Cover for ${Utils.shortenTitle(title)}">
+                <div class="list__item-stats">
+                    <h3 class="list__item-title">${Utils.shortenTitle(title)}</h3>
+                    <p class="list__item-genre">${authors}</p>
+                    <p class="list__item-ratings">${item.volumeInfo.averageRating ? item.volumeInfo.averageRating : "not rated"}</p>
+                </div>
+            </a>
         </li>
     `;
 }

@@ -21,3 +21,9 @@ export const VOLUMES = "https://www.googleapis.com/books/v1/volumes";
  * of different size.
  */
 export const FRONTCOVER = "https://books.google.com/books/content/images/frontcover/";
+
+/**
+ * CORS - help is on https://cors-anywhere.herokuapp.com/
+ * USAGE https://cors-anywhere.herokuapp.com/<URL>
+ * Redirection happense automatically
+ */
