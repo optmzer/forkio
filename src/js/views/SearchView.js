@@ -86,9 +86,17 @@ const renderPaginationButtons = (page, numRes, perPage) => {
     elements.pagination.innerHTML = ""; 
     //render new ones
     let buttons = `
-        <button id="gotoPrev" data-gotopage="${prevId}" class="btn pagination-btn ${left !== "disabled" ? "clickable" : "dead"}" ${left}>&lt;</button>
-        <button class="btn pagination-btn dead" disabled>page ${page + 1} of ${totalPages}</button>
-        <button id="gotoNext" data-gotopage="${nextId}" class="btn pagination-btn ${right !== "disabled"  ? "clickable" : "dead"}" ${right}>&gt;</button>
+        <button id="gotoPrev" data-gotopage="${prevId}" class="btn pagination-btn ${left !== "disabled" ? "clickable" : "dead"}" ${left}>
+            <svg>
+                <use href="img/icomoon/sprite.svg#icon-cheveron-left"></use>
+            </svg>
+        </button>
+        <button class="btn pagination-btn__center dead" disabled>page ${page + 1} of ${totalPages}</button>
+        <button id="gotoNext" data-gotopage="${nextId}" class="btn pagination-btn ${right !== "disabled"  ? "clickable" : "dead"}" ${right}>
+            <svg>
+                <use href="img/icomoon/sprite.svg#icon-cheveron-right"></use>
+            </svg>
+        </button>
     `;
 
     elements.pagination.insertAdjacentHTML("afterbegin", buttons);
@@ -97,7 +105,7 @@ const renderPaginationButtons = (page, numRes, perPage) => {
 export const highlightSelected = (id) => {
     // Remove selection from any other <li>
     const li = document.querySelectorAll(".list__item > a");
-    console.log("L101 SearchView elements.li => ", li);
+    // console.log("L101 SearchView elements.li => ", li);
     // console.log("L101 SearchView li => ", );
     if(li.length){
         for (const el of li) {

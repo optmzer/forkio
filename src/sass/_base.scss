@@ -78,11 +78,13 @@ input{
     &:hover{
         transform: translateY(-3px);
         box-shadow: 0 3px 4px rgba(0,0,0, .2);
+        filter: brightness(1.1); 
     }
 
     &:active{
         transform: translateY(0);
         box-shadow: none;
+        filter: brightness(1); 
     }
 }
 
@@ -90,4 +92,7 @@ input{
     background-color: rgb(156, 156, 156);
     color:  rgb(92, 91, 91);
     cursor: initial;
+    svg{
+        fill: rgb(92, 91, 91);
+    }
 }
