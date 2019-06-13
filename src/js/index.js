@@ -2,6 +2,7 @@
 import '../sass/main.scss'; // Created main.css
 import SearchModel from './models/SearchModel';
 import BookModel from './models/BookModel';
+import ShoppingListModel from './models/ShoppingListModel';
 
 import * as searchView from './views/SearchView';
 import * as Highlights from './views/HighlightsView';
@@ -36,11 +37,11 @@ const searchController = (query = "") => {
         // if no params get query from form
         query = searchView.getSearchQuery();
     }
-    
+
     // if there still no query do nothing
     if(query){
         //show loader
-        
+
         state.search.getBooks(query)
             .then(res => {
                 clearHtmlElement(elements.searchResultList);
@@ -52,7 +53,7 @@ const searchController = (query = "") => {
                     // show first book in the list
 
                     bookController(res.data.items[0].id);
-                } 
+                }
             }); //getSearch results
         form.reset(); //reset the form
     }
@@ -72,25 +73,33 @@ const bookController = (id = "") => {
     const hash = window.location.hash.replace("#", "");
     const bookId =  hash ? hash : id;
 
-    
+
     if (bookId) {
         clearHtmlElement(elements.bookHighlights);
         renderSpinner(elements.bookHighlights);
 
         searchView.highlightSelected(bookId);
         // console.log("L81 highlightSelected, bookId => ", bookId);
-   
+
         state.currentBook.getBookById(bookId)
             .then(() => {
                 //fill in details
                 clearHtmlElement(elements.bookHighlights);
                 Highlights.renderBookHighlights(state.currentBook);
-                
+
                 clearHtmlElement(elements.infoDescriptionContent);
                 DescriptionView.renderBookDescription(state.currentBook);
             })
             .catch(err => console.log("L94 index getBookById err => ", err));
     }
+}
+
+// Shopping Cart Controller
+const shoppingListController = () => {
+    const shoppintList = new ShoppingListModel();
+
+
+
 }
 
 const init = (query) => {
@@ -108,7 +117,7 @@ const init = (query) => {
         paginationController(e.target);
     });
 
-    ['hashchange', 'load'].forEach(eventType => 
+    ['hashchange', 'load'].forEach(eventType =>
         window.addEventListener(eventType, bookController));
 }
 
