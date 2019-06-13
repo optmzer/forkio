@@ -1,7 +1,8 @@
 export const elements = {
     searchForm: document.querySelector(".search"),
     searchResultDiv: document.querySelector(".search-results"),
-    searchResultList: document.querySelector(".search-results > .list"), // TODO: left panel
+    searchResultList: document.querySelector(".search-results > .list"),
+    // serchListItemsNodeList: document.querySelectorAll(".list__item > a"), // Not working when imported ???
     bookHighlights: document.querySelector(".hlts"),
     infoDescriptionContent: document.querySelector(".info-description-content"),
     infoRecommendations: document.querySelector(".info-recommendations"),

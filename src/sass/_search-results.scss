@@ -7,6 +7,9 @@
     .list{
         
         // ul{ }
+        &__item-active{
+            background-color: antiquewhite;
+        }
     
         &__item{
             display: flex;

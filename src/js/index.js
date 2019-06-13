@@ -8,7 +8,8 @@ import * as Highlights from './views/HighlightsView';
 import * as DescriptionView from './views/DescriptionView';
 
 import {elements, renderSpinner, clearHtmlElement} from './views/base';
-import * as Utils from './models/Utils';
+// import * as Utils from './models/Utils';
+import * as Base from './views/base';
 
 
 /**
@@ -71,13 +72,16 @@ const bookController = (id = "") => {
     const hash = window.location.hash.replace("#", "");
     const bookId =  hash ? hash : id;
 
+    
     if (bookId) {
         clearHtmlElement(elements.bookHighlights);
         renderSpinner(elements.bookHighlights);
 
+        searchView.highlightSelected(bookId);
+        // console.log("L81 highlightSelected, bookId => ", bookId);
+   
         state.currentBook.getBookById(bookId)
             .then(() => {
-                // console.log("L92 index, book => ", state.currentBook);
                 //fill in details
                 clearHtmlElement(elements.bookHighlights);
                 Highlights.renderBookHighlights(state.currentBook);

@@ -1,8 +1,6 @@
 import {elements} from './base';
 import * as Utils from '../models/Utils';
 
-
-// ======== EXPORTS ===========
 export const getForm = elements.searchForm;
 
 export const getSearchQuery = () => {
@@ -29,7 +27,7 @@ const renderListItem = (item) => {
     
     return `
         <li id="${item.id}"  class="list__item clickable" data-bookidtoshow="${item.id}">
-            <a href="/#${item.id}">
+            <a href="#${item.id}">
                 <img class="list__item-icon" src="${thumbnail}" alt="Cover for ${Utils.shortenTitle(title)}">
                 <div class="list__item-stats">
                     <h3 class="list__item-title">${Utils.shortenTitle(title)}</h3>
@@ -93,5 +91,22 @@ const renderPaginationButtons = (page, numRes, perPage) => {
         <button id="gotoNext" data-gotopage="${nextId}" class="btn pagination-btn ${right !== "disabled"  ? "clickable" : "dead"}" ${right}>&gt;</button>
     `;
 
-    elements.pagination.insertAdjacentHTML('afterbegin', buttons);
+    elements.pagination.insertAdjacentHTML("afterbegin", buttons);
+}
+
+export const highlightSelected = (id) => {
+    // Remove selection from any other <li>
+    const li = document.querySelectorAll(".list__item > a");
+    console.log("L101 SearchView elements.li => ", li);
+    // console.log("L101 SearchView li => ", );
+    if(li.length){
+        for (const el of li) {
+            el.classList.remove("list__item-active");
+        }
+    }
+
+    let item = document.querySelector(`a[href*="#${id}"]`);
+    if(item) {
+        item.classList.add("list__item-active");
+    }
 }
