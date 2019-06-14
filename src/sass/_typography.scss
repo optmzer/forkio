@@ -3,7 +3,7 @@
     grid-template-columns: 13% max-content 1fr;
     grid-gap: 1rem;
     align-items: center;
-    color: #eee;
+    color: $c-mw-font-section-header;
     text-transform: uppercase;
 
     &::before,
@@ -12,4 +12,25 @@
         height: 2px;
         background-color: currentColor;
     }
+}
+
+.hlts-meta__title{
+    display: grid;
+    grid-template-columns: 1fr max-content 1fr;
+    grid-gap: 1rem;
+    align-items: center;
+
+    font-size: 2rem;
+    color: $c-mw-font-dark;
+
+    &::before,
+    &::after{
+        content: "";
+        height: 2px;
+        background-color: currentColor;
+    }
+}
+
+h3{
+    color: $c-font-sec03;
 }

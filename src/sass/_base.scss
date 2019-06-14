@@ -11,6 +11,7 @@ html{
     box-sizing: border-box;
     font-family: 'Nunito Sans', sans-serif;
     background-color: rgb(233, 233, 233);
+    color: $c-font-sec01;
 }
 
 body{
@@ -51,25 +52,37 @@ input{
     display: grid;
     grid-template-rows: min-content 1fr;
 
-    // .header{ }
+    .header{
+        background-color: $c-mw-bg-dark;
+        .likes{
+            background-color: inherit;
+        }
+    }
 
     .content{
         display: grid;
-        grid-template-columns: minmax(max-content, 25%) minmax(min-content, 1fr);
+        grid-template-columns: minmax(max-content, 21%) minmax(min-content, 1fr) auto;
+        background-color: $c-mw-bg-light00;
+        color: $c-font-sec03;
 
-        .search-results{ 
-            background-color: burlywood;
+        .search-results{
+            background-color: $c-mw-bg-light00;
         }
 
-        .info{ 
+        .info{
             display: grid;
             grid-template-rows: max-content minmax(max-content, 1fr);
             grid-row-gap: 1rem;
+            background-color: $c-mw-bg-light00;
 
-            overflow-y: scroll;
+            // overflow-y: scroll;
             // &-gallery{ }
             // &-info{ }
             // &-cast{ }
+        }
+
+        .shopping-list{
+            width: 21vw;
         }
     }
 }
@@ -78,13 +91,13 @@ input{
     &:hover{
         transform: translateY(-3px);
         box-shadow: 0 3px 4px rgba(0,0,0, .2);
-        filter: brightness(1.1); 
+        filter: brightness(1.1);
     }
 
     &:active{
         transform: translateY(0);
         box-shadow: none;
-        filter: brightness(1); 
+        filter: brightness(1);
     }
 }
 

@@ -1,6 +1,6 @@
 import { genUUIDv1TimeBased } from './Utils';
 
-export default class ShoppingListModel {
+export default class ShopListModel {
     constructor(){
         this.items = [];
     }
@@ -22,7 +22,7 @@ export default class ShoppingListModel {
         const index = this.items.findIndex(el => el.id === id);
         if(index > 0 && this.items.length > 0){
             const item = this.items.splice(index, 1);
-            console.log("L26 ShoppingListModel. Item Deleted => ", item);
+            console.log("L26 ShopListModel. Item Deleted => ", item);
             return item;
         }
         return index;

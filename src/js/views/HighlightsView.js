@@ -15,7 +15,7 @@ const buildBookHighlights = (book) => {
             <img src="${GoogleApi.FRONTCOVER}${book.id}?fife=w200-h300" srcset="${GoogleApi.FRONTCOVER}${book.id}?fife=w400-h600 2x" class="hlts__poster-img" aria-hidden="true" alt="Cover art ${title}" itemprop="image">
         </figure>
         <div class="hlts-meta">
-            <div class="hlts-meta__movie-title">
+            <div class="hlts-meta__title">
                 <h2 class="">${title}</h2>
             </div>
             <h3 class="hlts-meta__director">by ${authors}</h3>

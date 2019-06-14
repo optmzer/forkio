@@ -1,18 +1,17 @@
 .info{
-    background-color: #111;
     padding: 1rem;
 
     .section-content{
         padding: 1rem 2rem;
-        color: #eee;
         font-size: 1.5rem;
+        color: inherit;
     }
 
-    .hlts{ 
+    .hlts{
         display: grid;
         grid-template-columns: min-content 1fr;
 
-        &__poster{ 
+        &__poster{
             display: contents;
             &-img{
                 width: 20rem;
@@ -21,29 +20,12 @@
 
         &-meta{
             padding: 1rem;
-            color: #eee;
 
-            &__movie-title{
-                display: grid;
-                grid-template-columns: 1fr max-content 1fr;
-                grid-gap: 1rem;
-                align-items: center;
-
-                font-size: 2rem;
-                color: currentColor;
-
-                &::before,
-                &::after{
-                    content: "";
-                    height: 2px;
-                    background-color: currentColor;
-                }
-            }
             // &__director{}
             // &__release-date{}
             // &__catch-phrase{ }
             // &__ratings{ }
-            
+
         }
     }
 
@@ -61,7 +43,7 @@
         }
     }
 
-    // &-description{ 
+    // &-description{
     // }
 
     // &-recommendations{ }

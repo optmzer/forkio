@@ -2,7 +2,7 @@
 import '../sass/main.scss'; // Created main.css
 import SearchModel from './models/SearchModel';
 import BookModel from './models/BookModel';
-import ShoppingListModel from './models/ShoppingListModel';
+import ShopListModel from './models/ShopListModel';
 
 import * as searchView from './views/SearchView';
 import * as Highlights from './views/HighlightsView';
@@ -26,7 +26,7 @@ const state = {
     search: new SearchModel(), // SearchModel
     volumeData: {}, // Response
     currentBook: new BookModel(),
-    shoppingList: new ShoppingListModel()
+    shopList: new ShopListModel()
 };
 
 const form = searchView.getForm;
@@ -95,10 +95,10 @@ const bookController = (id = "") => {
     }
 }
 
-// Shopping Cart Controller
-const shoppingListController = () => {
-    // state.shoppingList.generateUUID();
-    console.log("L101 index uuid => ", Utils.genUUIDv1TimeBased());
+// Shop Cart Controller
+const shopListController = () => {
+    // state.shopList.generateUUID();
+    // console.log("L101 index uuid => ", Utils.genUUIDv1TimeBased());
 }
 
 const init = (query) => {
@@ -120,7 +120,7 @@ const init = (query) => {
         window.addEventListener(eventType, bookController)
     );
 
-    shoppingListController();
+    shopListController();
 }
 
 init("best seller 2019");
