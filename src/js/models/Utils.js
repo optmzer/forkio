@@ -1,3 +1,5 @@
+import uuidv1 from 'uuid/v1';
+
 export const logError = (message, err) => {
     console.log(`${message}, err=> `, err);
 }
@@ -17,12 +19,12 @@ export const buildStringFromArr = (arr) => {
             if(index < 1 && arr.length >=2){
                 result += ", ";
             }
-            
+
             if(index > 2){
                 result += "...";
                 break;
             }
-            
+
             ++index;
         }
     }
@@ -32,6 +34,10 @@ export const buildStringFromArr = (arr) => {
 export const shortenTitle = (title, titleLength = 32) => {
     if(title.length > titleLength){
         return title.slice(0, titleLength) + "...";
-    } 
+    }
     return title;
+}
+
+export const genUUIDv1TimeBased = () => {
+    return uuidv1();
 }

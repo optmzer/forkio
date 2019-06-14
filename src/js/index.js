@@ -9,8 +9,8 @@ import * as Highlights from './views/HighlightsView';
 import * as DescriptionView from './views/DescriptionView';
 
 import {elements, renderSpinner, clearHtmlElement} from './views/base';
-// import * as Utils from './models/Utils';
-import * as Base from './views/base';
+import * as Utils from './models/Utils';
+// import * as Base from './views/base';
 
 
 /**
@@ -25,7 +25,8 @@ import * as Base from './views/base';
 const state = {
     search: new SearchModel(), // SearchModel
     volumeData: {}, // Response
-    currentBook: new BookModel()
+    currentBook: new BookModel(),
+    shoppingList: new ShoppingListModel()
 };
 
 const form = searchView.getForm;
@@ -96,10 +97,8 @@ const bookController = (id = "") => {
 
 // Shopping Cart Controller
 const shoppingListController = () => {
-    const shoppintList = new ShoppingListModel();
-
-
-
+    // state.shoppingList.generateUUID();
+    console.log("L101 index uuid => ", Utils.genUUIDv1TimeBased());
 }
 
 const init = (query) => {
@@ -118,7 +117,10 @@ const init = (query) => {
     });
 
     ['hashchange', 'load'].forEach(eventType =>
-        window.addEventListener(eventType, bookController));
+        window.addEventListener(eventType, bookController)
+    );
+
+    shoppingListController();
 }
 
 init("best seller 2019");

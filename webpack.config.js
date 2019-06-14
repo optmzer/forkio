@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-    target: 'node',
+    // target: 'node',
     entry: ['babel-polyfill', './src/js/index.js'],
     output: {
         path: path.resolve(__dirname, 'dist/'),

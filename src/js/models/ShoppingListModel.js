@@ -1,4 +1,4 @@
-import uuidv1 from 'uuid/v1';
+import { genUUIDv1TimeBased } from './Utils';
 
 export default class ShoppingListModel {
     constructor(){
@@ -6,13 +6,12 @@ export default class ShoppingListModel {
     }
 
     addItem(item){
-        const uuid = uuidv1();
-        const item = {
-            id: uuid, // Generates unique userId. timestamp based
+        const listItem = {
+            id: genUUIDv1TimeBased(), // Generates unique userId. timestamp based
             item
         };
-        this.items.push(item);
-        return item; // Just in case I need it.
+        this.items.push(listItem);
+        return listItem; // Just in case I need it.
     }
 
     /**
