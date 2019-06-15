@@ -31,16 +31,49 @@
 
     .info-actions{
 
-        .likes{
+        display: flex;
+        justify-content: center;
+        font-size: 1.5rem;
+        cursor: pointer;
 
-            &__icon{
-                margin-right: 2rem;
-                height: 3rem;
-                width: 3rem;
-                fill: #a01000;
-                cursor: pointer;
+        &__add-to{
+            display: flex;
+            align-items: center;
+            padding-top: .2rem;
+            padding-right: 1rem;
+            padding-bottom: .2rem;
+            padding-left: .2rem;
+            margin: 0 1rem;
+            background-color: $c-mw-bg-aws;
+
+            span{
+                padding: 0 1rem;
             }
         }
+
+        &__icon-bg{
+            background-color: $c-font-sec01;
+            border-radius: 1px;
+        }
+
+        &__icon{
+            display: block;
+            margin: .3rem;
+            height: 2.5rem;
+            width: 2.5rem;
+            fill: #fff;
+        }
+
+
+
+        &__add-to-cart{
+
+        }
+
+        &__add-to-wishlist{
+
+        }
+
     }
 
     // &-description{

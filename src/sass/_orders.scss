@@ -1,7 +1,10 @@
 .orders {
-    &-header{
-
+    .hide{
+        visibility: hidden;
+        width: 0;
     }
+
+    // &-header{ } // See typography
 
     .order-list{
 
@@ -43,7 +46,6 @@
                     opacity: .6;
                 }
             }
-
         }
     }
 
