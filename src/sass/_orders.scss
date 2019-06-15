@@ -1,0 +1,49 @@
+.orders {
+    &-header{
+
+    }
+
+    .order-list{
+
+        &__item{
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+
+            a {
+                width: 90%;
+            }
+
+            &-amount{
+                width: 5rem;
+                font-size: 1.5rem;
+                input{
+                    width: 100%;
+                }
+            }
+
+            &-icon{
+                width: 15%;
+                margin: 0 1rem;
+            }
+            &-stats{
+
+                &--title{}
+                &--author{}
+                &--price{}
+            }
+
+            &-actions{
+                margin-left: auto;
+
+                .trash{
+                    width: 2rem;
+                    height: 2rem;
+                    fill: $c-font-sec00;
+                    opacity: .6;
+                }
+            }
+
+        }
+    }
+}

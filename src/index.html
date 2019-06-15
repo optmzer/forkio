@@ -35,8 +35,14 @@
                 </button>
             </form>
             <div class="likes">
-                <svg class="likes__icon">
+                <svg class="likes__icon wishlist">
                     <use href="img/icomoon/sprite.svg#icon-heart"></use>
+                </svg>
+                <svg class="likes__icon shopping-cart">
+                    <use href="img/icomoon/sprite.svg#icon-shopping-cart"></use>
+                </svg>
+                <svg class="likes__icon user">
+                    <use href="img/icomoon/sprite.svg#icon-user-solid-circle"></use>
                 </svg>
             </div>
         </header>
@@ -118,39 +124,41 @@
                     </div>
                 </div>
             </div>
-            <div class="shop-list">
-                <h3 class="shop-header">Shopping Cart</h3>
-                <ul class="list">
-                    <li id="ScZzDwAAQBAJ" class="list__item" data-bookidtoshow="ScZzDwAAQBAJ">
-                        <a  class="list__item">
-                            <img class="list__item-icon" src="http://books.google.com/books/content?id=ScZzDwAAQBAJ&amp;printsec=frontcover&amp;img=1&amp;zoom=5&amp;edge=curl&amp;source=gbs_api" alt="Cover for Verses for the Dead">
-                            <div class="list__item-stats">
-                                <h3 class="list__item-title">Verses for the Dead</h3>
-                                <p class="list__item-genre">Douglas Preston, Lincoln Child</p>
-                                <p class="list__item-ratings">4.5</p>
+            <div class="orders">
+                <h2 class="orders-header">Shopping Cart</h2>
+                <ul class="order-list">
+                    <li id="ScZzDwAAQBAJ" class="order-list__item" data-bookidtoshow="ScZzDwAAQBAJ">
+                        <div class="order-list__item-amount">
+                            <input type="number" min="0" max="100" step="1">
+                        </div>
+                        <img class="order-list__item-icon" src="http://books.google.com/books/content?id=ScZzDwAAQBAJ&amp;printsec=frontcover&amp;img=1&amp;zoom=5&amp;edge=curl&amp;source=gbs_api" alt="Cover for Verses for the Dead">
+                        <div class="order-list__item-stats">
+                            <a href="#ScZzDwAAQBAJ" target="_blank" >
+                                <h3 class="order-list__item-stats--title">Verses for the Dead</h3>
+                            </a>
+                                <p class="order-list__item-stats--author">Douglas Preston, Lincoln Child</p>
+                                <p class="order-list__item-stats--price">$15.69</p>
+                            </div>
+                        <div class="order-list__item-actions">
+                            <svg class="trash">
+                                <use href="img/icomoon/sprite.svg#icon-trash"></use>
+                            </svg>
+                        </div>
+                    </li>
+                    <li id="ScZzDwAAQBAJ" class="order-list__item" data-bookidtoshow="ScZzDwAAQBAJ">
+                        <div class="order-list__item-amount">
+                            <input type="number" min="0" max="100" step="1">
+                        </div>
+                        <a href="#ScZzDwAAQBAJ" target="_blank" >
+                            <img class="order-list__item-icon" src="http://books.google.com/books/content?id=ScZzDwAAQBAJ&amp;printsec=frontcover&amp;img=1&amp;zoom=5&amp;edge=curl&amp;source=gbs_api" alt="Cover for Verses for the Dead">
+                            <div class="order-list__item-stats">
+                                <h3 class="order-list__item-stats--title">Verses for the Dead</h3>
+                                <p class="order-list__item-stats--author">Douglas Preston, Lincoln Child</p>
+                                <p class="order-list__item-stats--price">$15.69</p>
                             </div>
                         </a>
                     </li>
-                    <li id="C0h1DwAAQBAJ" class="list__item" data-bookidtoshow="C0h1DwAAQBAJ">
-                        <a class="list__item">
-                            <img class="list__item-icon" src="http://books.google.com/books/content?id=C0h1DwAAQBAJ&amp;printsec=frontcover&amp;img=1&amp;zoom=5&amp;edge=curl&amp;source=gbs_api" alt="Cover for Turning Point">
-                            <div class="list__item-stats">
-                                <h3 class="list__item-title">Turning Point</h3>
-                                <p class="list__item-genre">Danielle Steel</p>
-                                <p class="list__item-ratings">4</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li id="CKNdDwAAQBAJ" class="list__item" data-bookidtoshow="CKNdDwAAQBAJ">
-                        <a class="list__item">
-                            <img class="list__item-icon" src="http://books.google.com/books/content?id=CKNdDwAAQBAJ&amp;printsec=frontcover&amp;img=1&amp;zoom=5&amp;edge=curl&amp;source=gbs_api" alt="Cover for A Delicate Touch">
-                            <div class="list__item-stats">
-                                <h3 class="list__item-title">A Delicate Touch</h3>
-                                <p class="list__item-genre">Stuart Woods</p>
-                                <p class="list__item-ratings">3.5</p>
-                            </div>
-                        </a>
-                    </li>
+
                 </ul>
             </div>
         </div>
