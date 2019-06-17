@@ -3,6 +3,8 @@ import '../sass/main.scss'; // Created main.css
 import SearchModel from './models/SearchModel';
 import BookModel from './models/BookModel';
 import ShopListModel from './models/ShopListModel';
+import WishlistModel from './models/WishlistModel';
+
 
 import * as searchView from './views/SearchView';
 import * as Highlights from './views/HighlightsView';
@@ -26,7 +28,8 @@ const state = {
     search: new SearchModel(), // SearchModel
     volumeData: {}, // Response
     currentBook: new BookModel(),
-    shopList: new ShopListModel()
+    shopList: new ShopListModel(),
+    wishlist: new WishlistModel()
 };
 
 const form = searchView.getForm;
@@ -95,6 +98,30 @@ const bookController = (id = "") => {
     }
 }
 
+// Info Actions Controller. Add to Cart and Add to Wishlist buttons
+const infoActionsController = (target) => {
+    let cartBtn = target.closest("div.cart");
+    let wishlistBtn = target.closest("div.wishlist");
+    // const itemId = window.location.hash;
+
+    if(cartBtn && cartBtn.dataset.addtoCart){
+        // get item id from location
+        // Update cart
+        state.shopList.addItem(state.currentBook);
+    }
+
+    if(wishlistBtn && wishlistBtn.dataset.addtoWishlist){
+        // get item id from location
+
+        // update wishlist
+        state.wishlist.addItem(state.currentBook);
+    }
+
+    console.log("L120 infoActions => ", state.shopList);
+    console.log("L121 state.wishlist => ", state.wishlist);
+
+}
+
 // Shop Cart Controller
 const shopListController = () => {
     // state.shopList.generateUUID();
@@ -119,6 +146,11 @@ const init = (query) => {
     ['hashchange', 'load'].forEach(eventType =>
         window.addEventListener(eventType, bookController)
     );
+
+    // Add listeners to buttons Addto ShoppingList and add to wishlist
+    elements.infoActions.addEventListener('click', (e) => {
+        infoActionsController(e.target);
+    });
 
     shopListController();
 }

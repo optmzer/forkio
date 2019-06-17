@@ -4,16 +4,18 @@ export const elements = {
     searchResultList: document.querySelector(".search-results > .list"),
     // serchListItemsNodeList: document.querySelectorAll(".list__item > a"), // Not working when imported ???
     bookHighlights: document.querySelector(".hlts"),
+    infoActions: document.querySelector(".info-actions"),
     infoDescriptionContent: document.querySelector(".info-description-content"),
     infoRecommendations: document.querySelector(".info-recommendations"),
-    pagination: document.querySelector(".pagination")
+    pagination: document.querySelector(".pagination"),
+    ordersList: document.querySelector(".order-list")
 };
 
 
 /**
  * Spinner - Loader attaches itself to a parent element
  * by insertAdjacentHTML('afterbegin', spinner)
- * @param {htmlElement} parent 
+ * @param {htmlElement} parent
  */
 export const renderSpinner = (parent) => {
     //clear parent element to show spinner
@@ -32,7 +34,7 @@ export const renderSpinner = (parent) => {
 
 /**
  * Clears HTMLElement from its content
- * @param {htmlElement} element 
+ * @param {htmlElement} element
  */
 export const clearHtmlElement = (element) => {
     element.innerHTML = "";
