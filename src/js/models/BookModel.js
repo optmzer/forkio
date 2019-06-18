@@ -3,9 +3,20 @@ import * as GoogleApi from './GoogleApi';
 
 import * as Utils from './Utils';
 
+/**
+ * saleInfo: {
+    country: "NZ",
+    isEbook: false,
+    saleability: "NOT_FOR_SALE"
+ * }
+
+        retailPrice: { amount: 19.71, currencyCode: "NZD" }
+        saleability: "FOR_SALE"
+ */
+
 export default class BookModel {
 
-    constructor(){ 
+    constructor(){
      }
 
     async getBookById(id){
@@ -15,7 +26,8 @@ export default class BookModel {
         try {
             let uri = `${GoogleApi.VOLUMES}/${this.id}`;
             book = await axios(uri);
-            // Utils.logOutput("L18 book => ", book);
+            Utils.logOutput("L18 book => ", book);
+
             if(book.status === 200){
                 this.title = book.data.volumeInfo.title ;
                 this.authors = book.data.volumeInfo.authors ;
@@ -25,6 +37,8 @@ export default class BookModel {
                 this.thumbnailSmall = book.data.volumeInfo.imageLinks.small;
                 this.thumbnailMedium = book.data.volumeInfo.imageLinks.medium;
                 this.thumbnailLarge = book.data.volumeInfo.imageLinks.large;
+                this.saleInfo = book.data.saleInfo;
+
             } else {
                 Utils.logOutput("L29 getBookById status != 200", book);
             }
@@ -33,4 +47,3 @@ export default class BookModel {
         }
     }
 }
-

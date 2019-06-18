@@ -9,6 +9,7 @@ import WishlistModel from './models/WishlistModel';
 import * as searchView from './views/SearchView';
 import * as Highlights from './views/HighlightsView';
 import * as DescriptionView from './views/DescriptionView';
+import * as shopListView from './views/ShopListView';
 
 import {elements, renderSpinner, clearHtmlElement} from './views/base';
 import * as Utils from './models/Utils';
@@ -100,19 +101,15 @@ const bookController = (id = "") => {
 
 // Info Actions Controller. Add to Cart and Add to Wishlist buttons
 const infoActionsController = (target) => {
-    let cartBtn = target.closest("div.cart");
-    let wishlistBtn = target.closest("div.wishlist");
-    // const itemId = window.location.hash;
-
-    if(cartBtn && cartBtn.dataset.addtoCart){
-        // get item id from location
+    // Assume I can only add current item to cart/wishlist
+    // Current item is the one user is looking at right now.
+    if(target.matches("div.cart, div.cart *")){
         // Update cart
-        state.shopList.addItem(state.currentBook);
+        const item = state.shopList.addItem(state.currentBook);
+        shopListView.renderShopListItem(item);
     }
 
-    if(wishlistBtn && wishlistBtn.dataset.addtoWishlist){
-        // get item id from location
-
+    if(target.matches("div.wishlist, div.wishlist *")){
         // update wishlist
         state.wishlist.addItem(state.currentBook);
     }

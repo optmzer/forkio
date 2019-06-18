@@ -8,6 +8,7 @@ export default class ShopListModel {
     addItem(item){
         const listItem = {
             id: genUUIDv1TimeBased(), // Generates unique userId. timestamp based
+            amount: 1, // Amount of items to buy. default is 1
             item
         };
         this.items.push(listItem);
