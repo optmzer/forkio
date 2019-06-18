@@ -114,15 +114,25 @@ const infoActionsController = (target) => {
         state.wishlist.addItem(state.currentBook);
     }
 
-    console.log("L120 infoActions => ", state.shopList);
-    console.log("L121 state.wishlist => ", state.wishlist);
+    // console.log("L120 index -> infoActions => ", state.shopList);
+    // console.log("L121 index -> state.wishlist => ", state.wishlist);
 
 }
 
 // Shop Cart Controller
-const shopListController = () => {
-    // state.shopList.generateUUID();
-    // console.log("L101 index uuid => ", Utils.genUUIDv1TimeBased());
+const shopListController = (target) => {
+    if(target.matches(".delete-order-item, .delete-order-item *")){
+        const btnTrash = target.closest("li.order-list__item");
+        const id = btnTrash.dataset.orderitemtodelete;
+        // state.shopList.generateUUID();
+        // console.log("L126 index delete item btnTrash => ", btnTrash);
+        // console.log("L126 index delete item btnTrash => ", id);
+        if(id){
+            state.shopList.removeItem(id);
+            shopListView.deleteShopListItem(id);
+        }
+
+    }
 }
 
 const init = (query) => {
@@ -149,7 +159,9 @@ const init = (query) => {
         infoActionsController(e.target);
     });
 
-    shopListController();
+    elements.orderSectionDiv.addEventListener('click', e => {
+        shopListController(e.target);
+    });
 }
 
 init("best seller 2019");

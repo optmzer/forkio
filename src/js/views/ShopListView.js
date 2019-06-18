@@ -4,7 +4,7 @@ import { elements } from './base';
 // Create scss
 
 const createListItem = (bookModel) => {
-    console.log("L7 ShopListView item => ", bookModel);
+    // console.log("L7 ShopListView item => ", bookModel);
     const saleinfo = bookModel.item.saleInfo;
     let price = "";
     if(saleinfo.saleability === "FOR_SALE"){
@@ -14,7 +14,7 @@ const createListItem = (bookModel) => {
     }
 
     return `
-    <li id="${bookModel.item.id}" class="order-list__item" data-order-itemtodelete="${bookModel.item.id}">
+    <li data-orderitemtodelete="${bookModel.id}" class="order-list__item" >
         <div class="order-list__item-amount">
             <input class="order-list__item-amount-value" type="number" min="1" max="100" step="1" value="${bookModel.amount}">
         </div>
@@ -26,8 +26,8 @@ const createListItem = (bookModel) => {
                 <p class="order-list__item-stats--author">${bookModel.item.authors}</p>
                 <p class="order-list__item-stats--price">${price}</p>
             </div>
-        <div class="order-list__item-actions delete-order-item" id="${bookModel.id}">
-            <svg class="trash">
+        <div class="order-list__item-actions delete-order-item">
+            <svg class="trash" >
                 <use href="img/icomoon/sprite.svg#icon-trash"></use>
             </svg>
         </div>
@@ -44,13 +44,13 @@ export const renderShopListItem = (item) => {
 }
 
 export const deleteShopListItem = (id) => {
-    const li = document.querySelector(`[data-order-itemtodelete="${id}"]`);
-    console.log("L39 deleteShopListItem <li> to delete => ", li);
+    const li = document.querySelector(`[data-orderitemtodelete="${id}"]`);
+    // console.log("L39 deleteShopListItem <li> to delete => ", li);
 
-    li.parentNode.removeChild();
+    li.parentNode.removeChild(li);
 }
 
-export const ernderShopListItems = (items) => {
+export const rernderShopListItems = (items) => {
     for (const item of items) {
         renderShopListItem(item);
     }

@@ -8,6 +8,7 @@ export const elements = {
     infoDescriptionContent: document.querySelector(".info-description-content"),
     infoRecommendations: document.querySelector(".info-recommendations"),
     pagination: document.querySelector(".pagination"),
+    orderSectionDiv: document.querySelector(".orders"),
     ordersList: document.querySelector(".order-list")
 };
 
