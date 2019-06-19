@@ -106,8 +106,10 @@ const bookController = (id = "") => {
                 // Populate Description section
                 clearHtmlElement(elements.infoDescriptionContent);
                 DescriptionView.renderBookDescription(state.currentBook);
+
             })
             .catch(err => console.log("L94 index getBookById err => ", err));
+        console.log("L112 index -> state.wishlist => ", state.wishlist.items);
     }
 }
 
@@ -125,6 +127,7 @@ const infoActionsController = (target) => {
     if(target.matches("div.wishlist, div.wishlist *")){
         // update wishlist
         state.wishlist.toggleItem(state.currentBook);
+
         // Toggle wishlist selected class
         ActionsView.toggleWishlistSelected();
     }
@@ -147,11 +150,6 @@ const shopListController = (target) => {
         }
 
     }
-}
-
-const viewController = () => {
-
-
 }
 
 const init = (query) => {

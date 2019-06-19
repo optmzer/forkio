@@ -19,6 +19,7 @@ export const elements = {
  * by insertAdjacentHTML('afterbegin', spinner)
  * @param {htmlElement} parent
  */
+
 export const renderSpinner = (parent) => {
     //clear parent element to show spinner
     parent.innerHTML = "";

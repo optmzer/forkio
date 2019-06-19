@@ -13,7 +13,8 @@ export default class WishlistModel {
 
     addItem(item){
         const listItem = {
-            id: genUUIDv1TimeBased(), // Generates unique userId. timestamp based
+            // id: genUUIDv1TimeBased(), // Generates unique userId. timestamp based
+            id: item.id, // Generates unique userId. timestamp based
             item
         };
         this.items.push(listItem);
@@ -36,14 +37,16 @@ export default class WishlistModel {
     toggleItem(bookModel){
         // console.log(`L38 WishlistModel bookModel.id => ${bookModel.id}`);
         if(this.findItemIndexById(bookModel.id) === -1){
+            console.log("L40 WishlistModel.toggleItem ADD BOOK");
             this.addItem(bookModel);
         } else {
             this.removeItem(bookModel.id);
+            console.log("L44 WishlistModel.toggleItem REMOVE BOOK");
         }
     }
 
     findItemIndexById(id){
-        const index = this.items.findIndex(el => el.item.id === id);
+        const index = this.items.findIndex(el => el.id === id);
         // console.log(`L48 WishlistModel.findItemIndexById Item id => ${id}: index => ${index}`);
         return index;
     }
