@@ -5,6 +5,7 @@ export const elements = {
     // serchListItemsNodeList: document.querySelectorAll(".list__item > a"), // Not working when imported ???
     bookHighlights: document.querySelector(".hlts"),
     infoActions: document.querySelector(".info-actions"),
+    infoActionsWishListBtnIcon: document.querySelector("svg#btn-wishlist-icon"),
     infoDescriptionContent: document.querySelector(".info-description-content"),
     infoRecommendations: document.querySelector(".info-recommendations"),
     pagination: document.querySelector(".pagination"),

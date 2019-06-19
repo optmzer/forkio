@@ -6,10 +6,11 @@ import ShopListModel from './models/ShopListModel';
 import WishlistModel from './models/WishlistModel';
 
 
-import * as searchView from './views/SearchView';
+import * as SearchView from './views/SearchView';
 import * as Highlights from './views/HighlightsView';
 import * as DescriptionView from './views/DescriptionView';
-import * as shopListView from './views/ShopListView';
+import * as ShopListView from './views/ShopListView';
+import * as ActionsView from './views/ActionsView';
 
 import {elements, renderSpinner, clearHtmlElement} from './views/base';
 import * as Utils from './models/Utils';
@@ -33,14 +34,14 @@ const state = {
     wishlist: new WishlistModel()
 };
 
-const form = searchView.getForm;
+const form = SearchView.getForm;
 
 const searchController = (query = "") => {
     renderSpinner(elements.searchResultList);
 
     if(query === ""){
         // if no params get query from form
-        query = searchView.getSearchQuery();
+        query = SearchView.getSearchQuery();
     }
 
     // if there still no query do nothing
@@ -54,7 +55,7 @@ const searchController = (query = "") => {
                 state.volumeData = res;
                 // console.log("L36 state.volumeData => ", res);
                 if(res.data.items.length > 0){
-                    searchView.populateSearchList(res.data.items);
+                    SearchView.populateSearchList(res.data.items);
                     // show first book in the list
 
                     bookController(res.data.items[0].id);
@@ -70,7 +71,7 @@ const paginationController = (target) => {
     if (paginationBtn) {
         const gotopage = paginationBtn.dataset.gotopage;
         clearHtmlElement(elements.searchResultList);
-        searchView.populateSearchList(state.volumeData.data.items, gotopage);
+        SearchView.populateSearchList(state.volumeData.data.items, gotopage);
     }
 }
 
@@ -83,7 +84,7 @@ const bookController = (id = "") => {
         clearHtmlElement(elements.bookHighlights);
         renderSpinner(elements.bookHighlights);
 
-        searchView.highlightSelected(bookId);
+        SearchView.highlightSelected(bookId);
         // console.log("L81 highlightSelected, bookId => ", bookId);
 
         state.currentBook.getBookById(bookId)
@@ -92,6 +93,17 @@ const bookController = (id = "") => {
                 clearHtmlElement(elements.bookHighlights);
                 Highlights.renderBookHighlights(state.currentBook);
 
+                // Populate infoActions section
+                // Get wishlist button and checked if it is in the wishlist.
+                clearHtmlElement(elements.infoActions);
+                if(state.wishlist.findItemIndexById(state.currentBook.id) === -1){
+                    // Not in the wishlist
+                    ActionsView.renderActionButtons(false, false);
+                } else {
+                    ActionsView.renderActionButtons(false, true);
+                }
+
+                // Populate Description section
                 clearHtmlElement(elements.infoDescriptionContent);
                 DescriptionView.renderBookDescription(state.currentBook);
             })
@@ -103,20 +115,22 @@ const bookController = (id = "") => {
 const infoActionsController = (target) => {
     // Assume I can only add current item to cart/wishlist
     // Current item is the one user is looking at right now.
+
     if(target.matches("div.cart, div.cart *")){
         // Update cart
         const item = state.shopList.addItem(state.currentBook);
-        shopListView.renderShopListItem(item);
+        ShopListView.renderShopListItem(item);
     }
 
     if(target.matches("div.wishlist, div.wishlist *")){
         // update wishlist
-        state.wishlist.addItem(state.currentBook);
+        state.wishlist.toggleItem(state.currentBook);
+        // Toggle wishlist selected class
+        ActionsView.toggleWishlistSelected();
     }
 
     // console.log("L120 index -> infoActions => ", state.shopList);
-    // console.log("L121 index -> state.wishlist => ", state.wishlist);
-
+    console.log("L121 index -> state.wishlist => ", state.wishlist.items);
 }
 
 // Shop Cart Controller
@@ -129,10 +143,15 @@ const shopListController = (target) => {
         // console.log("L126 index delete item btnTrash => ", id);
         if(id){
             state.shopList.removeItem(id);
-            shopListView.deleteShopListItem(id);
+            ShopListView.deleteShopListItem(id);
         }
 
     }
+}
+
+const viewController = () => {
+
+
 }
 
 const init = (query) => {

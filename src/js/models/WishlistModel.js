@@ -25,12 +25,26 @@ export default class WishlistModel {
      * @param {itemId} id returns -1 if not found, Id if deleted
      */
     removeItem(id){
-        const index = this.items.findIndex(el => el.id === id);
-        if(index > 0 && this.items.length > 0){
+        const index = this.findItemIndexById(id);
+        if(index !== -1){
             const item = this.items.splice(index, 1);
-            console.log("L26 ShopListModel. Item Deleted => ", item);
             return item;
         }
+        return index;
+    }
+
+    toggleItem(bookModel){
+        // console.log(`L38 WishlistModel bookModel.id => ${bookModel.id}`);
+        if(this.findItemIndexById(bookModel.id) === -1){
+            this.addItem(bookModel);
+        } else {
+            this.removeItem(bookModel.id);
+        }
+    }
+
+    findItemIndexById(id){
+        const index = this.items.findIndex(el => el.item.id === id);
+        // console.log(`L48 WishlistModel.findItemIndexById Item id => ${id}: index => ${index}`);
         return index;
     }
 }

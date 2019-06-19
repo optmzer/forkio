@@ -65,7 +65,10 @@
         }
 
         // .cart{ }
-        // .wishlist{ }
+
+        &__icon--wishlist-selected{
+            fill: $c-mw-font-hlts-title;
+        }
 
     }
 
