@@ -1,10 +1,9 @@
-import {elements} from './base';
+import {elements, sprite} from './base';
 import * as Utils from '../models/Utils';
 
-export const getForm = elements.searchForm;
-
 export const getSearchQuery = () => {
-    // console.log("L7 SearchView.getForm => ", getForm);
+    const getForm = document.querySelector(".search");
+    console.log("L7 SearchView.getForm => ", getForm);
 
     let formData = new FormData(getForm);
     let formValues = [];
@@ -24,7 +23,7 @@ const renderListItem = (item) => {
     let authors = Utils.buildStringFromArr(item.volumeInfo.authors);
     let thumbnail = item.volumeInfo.imageLinks !== undefined ? item.volumeInfo.imageLinks.smallThumbnail : "default";
     let title = item.volumeInfo.title.replace(/"/g, ""); // remove quotes.
-    
+
     return `
         <li id="${item.id}"  class="list__item clickable" data-bookidtoshow="${item.id}">
             <a href="#${item.id}">
@@ -41,7 +40,7 @@ const renderListItem = (item) => {
 
 export const populateSearchList = (items, page = 0, perPage = 3) => {
     // console.log("L41 SearchView items => ", items);
-    let searchResultList = elements.searchResultList; 
+    let searchResultList = elements.searchResultList;
     let start = page * perPage;
     let stop = page * perPage + perPage;
     if(items.length > 0){
@@ -55,7 +54,7 @@ export const populateSearchList = (items, page = 0, perPage = 3) => {
 const renderPaginationButtons = (page, numRes, perPage) => {
     // data from DOM returned as a string
     page = typeof page === "number" ? page : parseInt(page);
-    
+
     const totalPages = Math.ceil(numRes / perPage);
     let left = "disabled";
     let right = "disabled";
@@ -83,18 +82,18 @@ const renderPaginationButtons = (page, numRes, perPage) => {
         }
     }
     // clear what was before
-    elements.pagination.innerHTML = ""; 
+    elements.pagination.innerHTML = "";
     //render new ones
     let buttons = `
         <button id="gotoPrev" data-gotopage="${prevId}" class="btn pagination-btn ${left !== "disabled" ? "clickable" : "dead"}" ${left}>
             <svg>
-                <use href="img/icomoon/sprite.svg#icon-cheveron-left"></use>
+                <use href="${sprite}#icon-cheveron-left"></use>
             </svg>
         </button>
         <button class="btn pagination-btn__center dead" disabled>page ${page + 1} of ${totalPages}</button>
         <button id="gotoNext" data-gotopage="${nextId}" class="btn pagination-btn ${right !== "disabled"  ? "clickable" : "dead"}" ${right}>
             <svg>
-                <use href="img/icomoon/sprite.svg#icon-cheveron-right"></use>
+                <use href="${sprite}#icon-cheveron-right"></use>
             </svg>
         </button>
     `;

@@ -1,5 +1,10 @@
+import _sprite from '../../img/icomoon/sprite.svg';
+import _logo from '../../img/favicon_package/android-chrome-192x192.png';
+
 export const elements = {
+    headerDiv: document.querySelector(".header"),
     searchForm: document.querySelector(".search"),
+    likesDiv: document.querySelector(".likes"),
     searchResultDiv: document.querySelector(".search-results"),
     searchResultList: document.querySelector(".search-results > .list"),
     // serchListItemsNodeList: document.querySelectorAll(".list__item > a"), // Not working when imported ???
@@ -13,6 +18,8 @@ export const elements = {
     ordersList: document.querySelector(".order-list")
 };
 
+export const sprite = _sprite;
+export const logo = _logo;
 
 /**
  * Spinner - Loader attaches itself to a parent element

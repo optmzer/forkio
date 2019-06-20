@@ -1,4 +1,4 @@
-import { elements } from './base';
+import { elements, sprite } from './base';
 
 // TODO: Create markup
 // Create scss
@@ -28,7 +28,7 @@ const createListItem = (bookModel) => {
             </div>
         <div class="order-list__item-actions delete-order-item">
             <svg class="trash" >
-                <use href="img/icomoon/sprite.svg#icon-trash"></use>
+                <use href="${sprite}#icon-trash"></use>
             </svg>
         </div>
     </li>

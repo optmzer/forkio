@@ -7,6 +7,7 @@ import WishlistModel from './models/WishlistModel';
 
 
 import * as SearchView from './views/SearchView';
+import * as HeaderView from './views/HeaderView';
 import * as Highlights from './views/HighlightsView';
 import * as DescriptionView from './views/DescriptionView';
 import * as ShopListView from './views/ShopListView';
@@ -34,7 +35,6 @@ const state = {
     wishlist: new WishlistModel()
 };
 
-const form = SearchView.getForm;
 
 const searchController = (query = "") => {
     renderSpinner(elements.searchResultList);
@@ -47,6 +47,7 @@ const searchController = (query = "") => {
     // if there still no query do nothing
     if(query){
         //show loader
+        // console.log("L50 index searchController query => ", query);
 
         state.search.getBooks(query)
             .then(res => {
@@ -61,8 +62,20 @@ const searchController = (query = "") => {
                     bookController(res.data.items[0].id);
                 }
             }); //getSearch results
-        form.reset(); //reset the form
+        document.querySelector(".search").reset(); //reset the form
     }
+}
+
+const likesController = (target = null) => {
+    // Open close cart/wishlist
+    // Update Likes/Cart
+    if(elements.likesDiv !== null){
+        clearHtmlElement(elements.likesDiv);
+    }
+
+    HeaderView.updateCart(2);
+    HeaderView.updateWishlist(4);
+    // Update Wishlist/Cart at click
 }
 
 const paginationController = (target) => {
@@ -109,7 +122,7 @@ const bookController = (id = "") => {
 
             })
             .catch(err => console.log("L94 index getBookById err => ", err));
-        console.log("L112 index -> state.wishlist => ", state.wishlist.items);
+        // console.log("L112 index -> state.wishlist => ", state.wishlist.items);
     }
 }
 
@@ -133,7 +146,7 @@ const infoActionsController = (target) => {
     }
 
     // console.log("L120 index -> infoActions => ", state.shopList);
-    console.log("L121 index -> state.wishlist => ", state.wishlist.items);
+    // console.log("L121 index -> state.wishlist => ", state.wishlist.items);
 }
 
 // Shop Cart Controller
@@ -141,9 +154,6 @@ const shopListController = (target) => {
     if(target.matches(".delete-order-item, .delete-order-item *")){
         const btnTrash = target.closest("li.order-list__item");
         const id = btnTrash.dataset.orderitemtodelete;
-        // state.shopList.generateUUID();
-        // console.log("L126 index delete item btnTrash => ", btnTrash);
-        // console.log("L126 index delete item btnTrash => ", id);
         if(id){
             state.shopList.removeItem(id);
             ShopListView.deleteShopListItem(id);
@@ -153,31 +163,44 @@ const shopListController = (target) => {
 }
 
 const init = (query) => {
-    // initiate SearchModel
-    searchController(query);
+    // Init Header with the search form
+    HeaderView.renderHeader();
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        console.log("process.env.MOCKUP_ENV_VAR => ", process.env.MOCKUP_ENV_VAR);
-        // console.log("process.env => ", process.env);
-        searchController();
-    });
+    //  wait for DOM to load then add eventListeners
+    document.addEventListener('DOMContentLoaded', () => {
 
-    elements.searchResultDiv.addEventListener('click', (e) => {
-        paginationController(e.target);
-    });
+        const form = document.querySelector(".search");
 
-    ['hashchange', 'load'].forEach(eventType =>
-        window.addEventListener(eventType, bookController)
-    );
+        // initiate SearchModel
+        searchController(query);
 
-    // Add listeners to buttons Addto ShoppingList and add to wishlist
-    elements.infoActions.addEventListener('click', (e) => {
-        infoActionsController(e.target);
-    });
+        // initiate Wishlist/Cart indicators Section
+        likesController();
 
-    elements.orderSectionDiv.addEventListener('click', e => {
-        shopListController(e.target);
+        // Add listener to search bar
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log("process.env.MOCKUP_ENV_VAR => ", process.env.MOCKUP_ENV_VAR);
+            // console.log("process.env => ", process.env);
+            searchController();
+        });
+
+        elements.searchResultDiv.addEventListener('click', (e) => {
+            paginationController(e.target);
+        });
+
+        ['hashchange', 'load'].forEach(eventType =>
+            window.addEventListener(eventType, bookController)
+        );
+
+        // Add listeners to buttons Addto ShoppingList and add to wishlist
+        elements.infoActions.addEventListener('click', (e) => {
+            infoActionsController(e.target);
+        });
+
+        elements.orderSectionDiv.addEventListener('click', e => {
+            shopListController(e.target);
+        });
     });
 }
 

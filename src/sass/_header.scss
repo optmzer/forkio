@@ -48,12 +48,41 @@
         justify-content: end;
         flex: 0 0 21rem;
 
-        &__icon{
-            margin-right: 2rem;
-            height: 3rem;
-            width: 3rem;
-            fill: #9a534b;
-            cursor: pointer;
+        &-item{
+            position: relative;
+
+            &__icon{
+                margin-right: 2rem;
+                height: 3rem;
+                width: 3rem;
+                fill: #9a534b;
+                cursor: pointer;
+
+                &--text{
+                    height: 2rem;
+                    width: 2rem;
+                    position: absolute;
+                    top: 0%;
+                    right: 0px;
+                    color: aliceblue;
+                    transform: translate(-50%, -50%);
+                }
+            }
+
+            &--wishlist{
+
+            }
+
+            &--shopping{
+
+            }
+
+            &--user{
+
+            }
         }
+
+
+
     }
 }

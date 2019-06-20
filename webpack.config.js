@@ -47,16 +47,16 @@ module.exports = env => {
                         'sass-loader'
                     ]
                 }
-                // ,{
-                //     test: /\.(png|jp(e*)g|svg)$/,
-                //     use: [{
-                //         loader: 'url-loader',
-                //         options: {
-                //             limit: 8000,
-                //             name: '[path][name].[ext]'
-                //         }
-                //     }]
-                // }
+                ,{
+                    test: /\.(png|jpe?g|svg)$/,
+                    use: [{
+                        loader: 'url-loader',
+                        options: {
+                            limit: 8,
+                            name: 'img/[name].[ext]'
+                        }
+                    }]
+                }
             ]
         }
     };

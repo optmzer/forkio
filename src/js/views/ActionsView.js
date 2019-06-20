@@ -1,4 +1,4 @@
-import { elements } from './base';
+import { elements, sprite } from './base';
 
 export const toggleWishlistSelected = () => {
     // const btn = elements.infoActionsWishListBtnIcon;
@@ -13,7 +13,7 @@ const createActionButtons = (cart, wishlist) => {
         <div class="clickable info-actions__add-to cart" data-addto-cart="true">
             <div class="info-actions__icon-bg">
                 <svg id="btn-cart-icon" class="info-actions__icon ${cart ? "info-actions__icon--cart-selected" : ""}">
-                    <use href="img/icomoon/sprite.svg#icon-shopping-cart"></use>
+                    <use href="${sprite}#icon-shopping-cart"></use>
                 </svg>
             </div>
             <span>Add to Cart</span>
@@ -21,7 +21,7 @@ const createActionButtons = (cart, wishlist) => {
         <div class="clickable info-actions__add-to wishlist" data-addto-wishlist="true">
             <div class="info-actions__icon-bg">
                 <svg id="btn-wishlist-icon" class="info-actions__icon ${wishlist ? "info-actions__icon--wishlist-selected" : ""}" title="Add to Wish List">
-                    <use href="img/icomoon/sprite.svg#icon-heart"></use>
+                    <use href="${sprite}#icon-heart"></use>
                 </svg>
             </div>
             <span>Add to Wishlist</span>
