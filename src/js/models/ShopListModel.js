@@ -32,4 +32,8 @@ export default class ShopListModel {
     getListLength(){
         return this.items.length;
     }
+
+    getItems(){
+        return this.items;
+    }
 }

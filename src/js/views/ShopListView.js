@@ -34,7 +34,8 @@ const createListItem = (bookModel) => {
 
 export const renderShopListItem = (item) => {
     //get the parent shoppingList <ul>
-    const shoppingList = elements.ordersList;
+    // const shoppingList = elements.ordersList;
+    const shoppingList = document.querySelector(".order-list");
     // console.log("L32 ShoppingListView => ", shoppingList);
 
     shoppingList.insertAdjacentHTML('afterbegin', createListItem(item));
@@ -46,8 +47,14 @@ export const deleteShopListItem = (id) => {
 }
 
 export const renderShopListItems = (items) => {
-    for (const item of items) {
-        renderShopListItem(item);
+    // If div section is already populated add items
+    const el = document.querySelector(".order-list");
+    if(el){
+        // clear element
+        clearHtmlElement(el);
+        for (const item of items) {
+            renderShopListItem(item);
+        }
     }
 }
 
@@ -88,7 +95,8 @@ const createShopListSection = (items) => {
     `;
 }
 
-const renderShopListSection = (items) => {
+export const renderShopListSection = (items) => {
     const el = elements.orderSectionDiv;
+    clearHtmlElement(el);
     el.insertAdjacentHTML("afterbegin", createShopListSection(items));
 }
