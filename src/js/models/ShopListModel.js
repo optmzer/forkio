@@ -21,11 +21,15 @@ export default class ShopListModel {
      */
     removeItem(id){
         const index = this.items.findIndex(el => el.id === id);
-        if(index > 0 && this.items.length > 0){
+        if(index >= 0){
             const item = this.items.splice(index, 1);
-            console.log("L26 ShopListModel. Item Deleted => ", item);
+            // console.log("L28 ShopListModel. Item Deleted => ", item);
             return item;
         }
         return index;
+    }
+
+    getListLength(){
+        return this.items.length;
     }
 }

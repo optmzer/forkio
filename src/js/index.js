@@ -69,9 +69,17 @@ const searchController = (query = "") => {
 const likesController = (target = null) => {
     // Open close cart/wishlist
     // Update Likes/Cart
-    if(elements.likesDiv !== null){
-        clearHtmlElement(elements.likesDiv);
+    // if(elements.likesDiv !== null){
+    // Why did I put it inhere???
+    //     clearHtmlElement(elements.likesDiv);
+    // }
+    // if whishlist -> render wishlist
+    let cartClick = target.matches("div.likes-item--shopping, div.likes-item--shopping *");
+    // console.log("L78 index likesController => ", cartClick);
+    if(cartClick){
+        ShopListView.toggleShopList(state.shopList.items);
     }
+    // if cart -> render Cart
 
     // Update Wishlist/Cart at click
 }
@@ -133,7 +141,7 @@ const infoActionsController = (target) => {
         // Update cart
         state.shopList.addItem(state.currentBook);
         // Set Cart Number to array length
-        HeaderView.updateCart(state.shopList.items.length);
+        HeaderView.updateCart(state.shopList.getListLength());
     }
 
     if(target.matches("div.wishlist, div.wishlist *")){
@@ -157,8 +165,11 @@ const shopListController = (target) => {
         const btnTrash = target.closest("li.order-list__item");
         const id = btnTrash.dataset.orderitemtodelete;
         if(id){
+            // console.log("L170 index shopListController delete-order before => ", state.shopList.getListLength())
             state.shopList.removeItem(id);
             ShopListView.deleteShopListItem(id);
+            // console.log("L170 index shopListController delete-order after => ", state.shopList.getListLength())
+            HeaderView.updateCart(state.shopList.getListLength());
         }
 
     }
@@ -169,7 +180,7 @@ const init = (query) => {
     HeaderView.renderHeader();
 
     //  wait for DOM to load then add eventListeners
-    document.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('DOMContentLoaded', () => {
 
         const form = document.querySelector(".search");
 
@@ -177,7 +188,7 @@ const init = (query) => {
         searchController(query);
 
         // initiate Wishlist/Cart indicators Section
-        likesController();
+        // likesController();
 
         // Add listener to search bar
         form.addEventListener('submit', (e) => {
@@ -203,7 +214,9 @@ const init = (query) => {
         elements.orderSectionDiv.addEventListener('click', e => {
             // Delete Item
             shopListController(e.target);
+        });
 
+        document.querySelector("div.likes").addEventListener('click', e => {
             // Toggle ShopList/Wishlist
             likesController(e.target);
         });
