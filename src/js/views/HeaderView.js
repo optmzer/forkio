@@ -53,11 +53,13 @@ const createLikesElements = (wishlistCount = "", cartCount = "") => {
 }
 
 export const updateWishlist = (likesNumber) => {
-    document.querySelector(".likes-item--wishlist>span").innerText = likesNumber;
+    const el = document.querySelector(".likes-item--wishlist>span");
+    el.innerText = likesNumber === 0 ? "" : likesNumber;
 }
 
 export const updateCart = (itemsNumber) => {
-    document.querySelector(".likes-item--shopping>span").innerText = itemsNumber;
+    const el = document.querySelector(".likes-item--shopping>span");
+    el.innerText = itemsNumber === 0 ? "" : itemsNumber;
 }
 
 export const updateLikesData = (likesNumber, itemsNumber) => {

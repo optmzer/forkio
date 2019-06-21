@@ -73,8 +73,6 @@ const likesController = (target = null) => {
         clearHtmlElement(elements.likesDiv);
     }
 
-    HeaderView.updateCart(2);
-    HeaderView.updateWishlist(4);
     // Update Wishlist/Cart at click
 }
 
@@ -133,8 +131,9 @@ const infoActionsController = (target) => {
 
     if(target.matches("div.cart, div.cart *")){
         // Update cart
-        const item = state.shopList.addItem(state.currentBook);
-        ShopListView.renderShopListItem(item);
+        state.shopList.addItem(state.currentBook);
+        // Set Cart Number to array length
+        HeaderView.updateCart(state.shopList.items.length);
     }
 
     if(target.matches("div.wishlist, div.wishlist *")){
@@ -143,6 +142,9 @@ const infoActionsController = (target) => {
 
         // Toggle wishlist selected class
         ActionsView.toggleWishlistSelected();
+
+        // Update Wishlist Number
+        HeaderView.updateWishlist(state.wishlist.items.length);
     }
 
     // console.log("L120 index -> infoActions => ", state.shopList);
@@ -199,7 +201,11 @@ const init = (query) => {
         });
 
         elements.orderSectionDiv.addEventListener('click', e => {
+            // Delete Item
             shopListController(e.target);
+
+            // Toggle ShopList/Wishlist
+            likesController(e.target);
         });
     });
 }

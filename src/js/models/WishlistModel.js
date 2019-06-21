@@ -1,4 +1,3 @@
-import { genUUIDv1TimeBased } from './Utils';
 
 /**
  * At this stage WishlistModel looks the same as ShoppingList to make it easier

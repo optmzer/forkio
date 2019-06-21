@@ -50,8 +50,33 @@ export const deleteShopListItem = (id) => {
     li.parentNode.removeChild(li);
 }
 
-export const rernderShopListItems = (items) => {
+export const renderShopListItems = (items) => {
     for (const item of items) {
         renderShopListItem(item);
     }
+}
+
+export const toggleShopList = (items) => {
+    // childElementCount == 0 -- Empty
+    const ordersDiv = elements.orderSectionDiv;
+    if(ordersDiv.childElementCount == 0) {
+        renderShopListSection(items);
+    }
+    console.log(`L61 ShopListView ordersDiv => ${ordersDiv}`);
+}
+
+const renderShopListSection = (items) => {
+    return `
+        <h2 class="orders-header">Shopping Cart</h2>
+        <ul class="order-list">
+            ${renderShopListItems(items)}
+        </ul>
+        <div class="order-total">
+            <p>Order Total:</p><span class="order-total__price">$120.00</span>
+        </div>
+        <div class="order-actions">
+            <button class="btn clickable order-actions__checkout">Checkout</button>
+            <button class="btn clickable order-actions__close">Close</button>
+        </div>
+    `;
 }
