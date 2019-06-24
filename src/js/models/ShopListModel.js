@@ -1,4 +1,5 @@
 import { genUUIDv1TimeBased } from './Utils';
+import BookModel from './BookModel';
 
 export default class ShopListModel {
     constructor(){
@@ -6,13 +7,21 @@ export default class ShopListModel {
     }
 
     addItem(item){
+        const _book = new BookModel();
+        const keys = Object.keys(item);
+
+        for (const key of keys) {
+            _book[key] = item[key];
+        }
+
         const listItem = {
             id: genUUIDv1TimeBased(), // Generates unique userId. timestamp based
             amount: 1, // Amount of items to buy. default is 1
-            item
+            item: _book
         };
+        // this.items = this.items.splice(0, this.items.length); // Did not fix the bug.
         this.items.push(listItem);
-        console.log("L15 ShopListModel this.items => ", this.items);
+        // console.log("L15 ShopListModel this.items => ", this.items);
     }
 
     /**
@@ -29,11 +38,11 @@ export default class ShopListModel {
         return index;
     }
 
-    // getListLength(){
-    //     return this.items.length;
-    // }
+    getListLength(){
+        return this.items.length;
+    }
 
-    // getItems(){
-    //     return this.items;
-    // }
+    getItems(){
+        return this.items;
+    }
 }

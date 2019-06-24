@@ -4,10 +4,10 @@ const createListItem = (bookModel) => {
     // console.log("L7 ShopListView item => ", bookModel);
     const saleinfo = bookModel.item.saleInfo;
     let price = "";
-    if(saleinfo.saleability === "FOR_SALE"){
+    if(saleinfo.saleability === "FOR_SALE") {
         price = saleinfo.retailPrice.currencyCode + ' ' + saleinfo.retailPrice.amount;
-    }else {
-        price = 'NOT FOR SALE';
+    } else {
+        price = 'NOT AVAILABLE FOR SALE';
     }
 
     return `
