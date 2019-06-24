@@ -12,7 +12,7 @@ export default class ShopListModel {
             item
         };
         this.items.push(listItem);
-        return listItem; // Just in case I need it.
+        console.log("L15 ShopListModel this.items => ", this.items);
     }
 
     /**
@@ -29,11 +29,11 @@ export default class ShopListModel {
         return index;
     }
 
-    getListLength(){
-        return this.items.length;
-    }
+    // getListLength(){
+    //     return this.items.length;
+    // }
 
-    getItems(){
-        return this.items;
-    }
+    // getItems(){
+    //     return this.items;
+    // }
 }

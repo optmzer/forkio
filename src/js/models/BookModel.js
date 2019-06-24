@@ -26,7 +26,7 @@ export default class BookModel {
         try {
             let uri = `${GoogleApi.VOLUMES}/${this.id}`;
             book = await axios(uri);
-            // Utils.logOutput("L18 book => ", book);
+            Utils.logOutput("L29 BookModel => ", book);
 
             if(book.status === 200){
                 this.title = book.data.volumeInfo.title ;
@@ -38,6 +38,8 @@ export default class BookModel {
                 this.thumbnailMedium = book.data.volumeInfo.imageLinks.medium;
                 this.thumbnailLarge = book.data.volumeInfo.imageLinks.large;
                 this.saleInfo = book.data.saleInfo;
+                this.publisher = book.data.volumeInfo.publisher;
+                this.publishedDate = book.data.volumeInfo.publishedDate;
 
             } else {
                 Utils.logOutput("L29 getBookById status != 200", book);
