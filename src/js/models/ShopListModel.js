@@ -5,7 +5,7 @@ export default class ShopListModel {
     constructor(){
         this.items = [];
         this.total = 0;
-        this.totalItems = 0;
+        this.totalAmount = 0;
     }
 
     addItem(item){
@@ -23,8 +23,9 @@ export default class ShopListModel {
         };
         // this.items = this.items.splice(0, this.items.length); // Did not fix the bug.
         this.items.push(listItem);
-        // console.log("L15 ShopListModel this.items => ", this.items);
         this.updateOrderTotals();
+        // console.log("L27 ShopListModel this.total => ", this.total);
+        // console.log("L28 ShopListModel this.totalAmount => ", this.totalAmount);
     }
 
     /**
@@ -53,12 +54,12 @@ export default class ShopListModel {
         return this.items;
     }
 
+    getOrderTotalPrice(){
+        return this.total;
+    }
+
     getOrderTotalAmount() {
-        let totalAmount = 0;
-        for (const item of this.getItems()) {
-            totalAmount += item.amount;
-        }
-        return totalAmount;
+        return this.totalAmount;
     }
 
 /**
@@ -66,40 +67,37 @@ export default class ShopListModel {
 ​​​
 saleability: "FOR_SALE"
  */
-
-    getOrderTotalPrice(){
+    calculateOrderTotalPrice(){
+        this.total = 0;
         for (const _bookModel of this.getItems()) {
             const info = _bookModel.item.saleInfo;
             if(info.saleability === "FOR_SALE" && info.listPrice.amount !== undefined){
                 this.total += (info.listPrice.amount * _bookModel.amount);
             }
         }
-        return this.total;
     }
 
-    addOneBookToExistingOrder(id){
+    calculateOrderTotalAmount() {
+        this.totalAmount = 0;
+        for (const item of this.getItems()) {
+            this.totalAmount += item.amount;
+        }
+    }
+
+    updateItemAmount(id, amount){
         // find item
         const index = this.items.findIndex(el => el.id === id);
         // ++amount
-        if(index >= 0){
-            this.items[index].amount = 1 + this.items[index].amount;
-        }
-        // recalc order total
-        this.updateOrderTotals();
-    }
-
-    subtractOneBookToExistingOrder(id){
-        const index = this.items.findIndex(el => el.id === id);
-        if(index >= 0 && this.items[index].amount >= 1){
-            this.items[index].amount = this.items[index].amount - 1;
+        if(index >= 0 && amount >= 0){
+            this.items[index].amount = amount;
         }
         // recalc order total
         this.updateOrderTotals();
     }
 
     updateOrderTotals(){
-        this.getOrderTotalPrice();
-        this.getOrderTotalAmount();
+        this.calculateOrderTotalAmount();
+        this.calculateOrderTotalPrice();
     }
 
 }

@@ -78,6 +78,7 @@ const likesController = (target = null) => {
     // console.log("L78 index likesController => ", cartClick);
     if(cartClick){
         ShopListView.toggleShopList(state.shopList.getItems());
+        ShopListView.renderOrderTotalPrice(state.shopList.getOrderTotalPrice());
     }
     // if cart -> render Cart
 
@@ -166,27 +167,28 @@ const infoActionsController = (target) => {
 const shopListController = (target) => {
     // const itemUUID =
     const li = target.closest("li.order-list__item");
-    const id = li.dataset.orderitemtodelete;
-    console.log("L176 index shopListController target => ", target);
-    console.log("L176 index shopListController li id => ", id);
-
+    const id = li ? li.dataset.orderitemtodelete : null;
+    // console.log("L176 index shopListController target => ", target);
+    // console.log("L176 index shopListController li id => ", id);
     if(target.matches(".delete-order-item, .delete-order-item *")){
         if(id){
             // console.log("L170 index shopListController delete-order before => ", state.shopList.getOrderTotalAmount()
             state.shopList.removeItem(id);
-            ShopListView.deleteShopListItem(id);
             HeaderView.updateCart(state.shopList.getOrderTotalAmount());
+            ShopListView.deleteShopListItem(id);
+            ShopListView.renderOrderTotalPrice(state.shopList.getOrderTotalPrice());
         }
     }
 
     if(target.matches(".order-actions__close, .order-actions__close *")){
         //close shopping list
-        ShopListView.toggleShopList(state.shopList.getItems());
+        ShopListView.toggleShopList(state.shopList.getItems(), state.shopList.getOrderTotalPrice());
     }
 
     // Adding book amounts
     if(target.matches(".order-list__item-amount-value")){
-        console.log("L188 index amount changed => ", target.value);
+        // console.log("L188 index amount changed => ", target.value);
+        state.shopList.updateItemAmount(id, Number.parseInt(target.value));
         HeaderView.updateCart(state.shopList.getOrderTotalAmount());
         ShopListView.renderOrderTotalPrice(state.shopList.getOrderTotalPrice());
     }

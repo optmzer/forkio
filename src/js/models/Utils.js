@@ -41,3 +41,7 @@ export const shortenTitle = (title, titleLength = 32) => {
 export const genUUIDv1TimeBased = () => {
     return uuidv1();
 }
+
+export const convertToLocalCurrency = (price) => {
+    return price.toLocaleString('en-NZ', { style: 'currency', currency: 'NZD' });
+}

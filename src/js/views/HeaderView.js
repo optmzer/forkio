@@ -60,6 +60,7 @@ export const updateWishlist = (likesNumber) => {
 }
 
 export const updateCart = (itemsNumber) => {
+    // console.log("L63 HeaderView updateCart number => ", itemsNumber);
     const el = document.querySelector(".likes-item--shopping>span");
     el.innerText = itemsNumber === 0 ? "" : itemsNumber;
 }

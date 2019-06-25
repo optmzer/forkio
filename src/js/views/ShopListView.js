@@ -1,11 +1,12 @@
 import { elements, sprite, clearHtmlElement } from './base';
+import { convertToLocalCurrency } from '../models/Utils';
 
 const createListItem = (bookModel) => {
     // console.log("L7 ShopListView item => ", bookModel);
     const saleinfo = bookModel.item.saleInfo;
     let price = "";
     if(saleinfo.saleability === "FOR_SALE") {
-        price = saleinfo.retailPrice.currencyCode + ' ' + saleinfo.retailPrice.amount;
+        price = convertToLocalCurrency(saleinfo.listPrice.amount);
     } else {
         price = 'NOT AVAILABLE FOR SALE';
     }
@@ -68,11 +69,11 @@ const createShopListItems = (items) => {
     return list;
 }
 
-export const toggleShopList = (items) => {
+export const toggleShopList = (items, total) => {
     // childElementCount == 0 -- Empty
     const ordersDiv = elements.orderSectionDiv;
     if(ordersDiv.childElementCount == 0) {
-        renderShopListSection(items);
+        renderShopListSection(items, total);
     } else {
         clearHtmlElement(ordersDiv);
     }
@@ -80,14 +81,16 @@ export const toggleShopList = (items) => {
 
 const createShopListSection = (items, total = 0) => {
     const list = items.length === 0 ? "" : createShopListItems(items);
+    let msg = "";
+    if(total === 0) {
+        msg = `<p>Your Cart Is Empty</p>`;
+    } else {
+        msg = createOrderTotalElement(total);
+    }
     return `
         <h2 class="orders-header">Shopping Cart</h2>
-        <ul class="order-list">
-            ${list}
-        </ul>
-        <div class="order-total">
-            <p>Order Total:</p><span class="order-total__price">${total.toLocaleString('en-NZ', { style: 'currency', currency: 'NZD' })}</span>
-        </div>
+        <ul class="order-list">${list}</ul>
+        <div class="order-total">${msg}</div>
         <div class="order-actions">
             <button class="btn clickable order-actions__checkout">Checkout</button>
             <button class="btn clickable order-actions__close">Close</button>
@@ -103,8 +106,20 @@ export const renderShopListSection = (items, total) => {
 
 export const renderOrderTotalPrice = (totalPrice) => {
     // Get elem
+    const el = document.querySelector("div.order-total");
+    if(el.childElementCount > 0){
+        //clear it
+        clearHtmlElement(el);
+        // render new one
+        el.insertAdjacentHTML('afterbegin', createOrderTotalElement(totalPrice));
+    }
+}
 
-    //clear it
-
-    // render new one
+const createOrderTotalElement = (total) => {
+    return `
+        <p>Order Total:</p>
+        <span class="order-total__price">
+            ${convertToLocalCurrency(total)}
+        </span>
+    `;
 }
