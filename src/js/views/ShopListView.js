@@ -78,7 +78,7 @@ export const toggleShopList = (items) => {
     }
 }
 
-const createShopListSection = (items) => {
+const createShopListSection = (items, total = 0) => {
     const list = items.length === 0 ? "" : createShopListItems(items);
     return `
         <h2 class="orders-header">Shopping Cart</h2>
@@ -86,7 +86,7 @@ const createShopListSection = (items) => {
             ${list}
         </ul>
         <div class="order-total">
-            <p>Order Total:</p><span class="order-total__price">$120.00</span>
+            <p>Order Total:</p><span class="order-total__price">${total.toLocaleString('en-NZ', { style: 'currency', currency: 'NZD' })}</span>
         </div>
         <div class="order-actions">
             <button class="btn clickable order-actions__checkout">Checkout</button>
@@ -95,8 +95,16 @@ const createShopListSection = (items) => {
     `;
 }
 
-export const renderShopListSection = (items) => {
+export const renderShopListSection = (items, total) => {
     const el = elements.orderSectionDiv;
     clearHtmlElement(el);
-    el.insertAdjacentHTML("afterbegin", createShopListSection(items));
+    el.insertAdjacentHTML("afterbegin", createShopListSection(items, total));
+}
+
+export const renderOrderTotalPrice = (totalPrice) => {
+    // Get elem
+
+    //clear it
+
+    // render new one
 }

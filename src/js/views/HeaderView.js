@@ -44,9 +44,11 @@ const createLikesElements = (wishlistCount = "", cartCount = "") => {
                 <span class="likes-item__icon--text">${cartCount}</span>
             </div>
             <div class="likes-item likes-item--user">
+                <a href="https://github.com/optmzer/forkio" target="_blank" title="Git source">
                 <svg class="likes-item__icon likes-item__icon--user">
                     <use href="${sprite}#icon-user-solid-circle"></use>
                 </svg>
+                </a>
             </div>
         </div>
     `;

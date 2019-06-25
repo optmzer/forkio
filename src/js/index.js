@@ -142,8 +142,8 @@ const infoActionsController = (target) => {
         // console.log("L142 index infoActionsController state.shopList.getItems() => ", state.shopList.getItems());
         state.shopList.addItem(state.currentBook);
         // Set Cart Number to array length
-        HeaderView.updateCart(state.shopList.getListLength());
-        ShopListView.renderShopListItems(state.shopList.getItems());
+        HeaderView.updateCart(state.shopList.getOrderTotalAmount());
+        ShopListView.renderShopListItems(state.shopList.getItems(), state.shopList.getOrderTotalPrice());
         // console.log("L147 index infoActionsController state.shopList.getItems() => ", state.shopList.getItems());
     }
 
@@ -164,22 +164,31 @@ const infoActionsController = (target) => {
 
 // Shop Cart Controller
 const shopListController = (target) => {
+    // const itemUUID =
+    const li = target.closest("li.order-list__item");
+    const id = li.dataset.orderitemtodelete;
+    console.log("L176 index shopListController target => ", target);
+    console.log("L176 index shopListController li id => ", id);
+
     if(target.matches(".delete-order-item, .delete-order-item *")){
-        const btnTrash = target.closest("li.order-list__item");
-        const id = btnTrash.dataset.orderitemtodelete;
         if(id){
-            // console.log("L170 index shopListController delete-order before => ", state.shopList.getListLength()
+            // console.log("L170 index shopListController delete-order before => ", state.shopList.getOrderTotalAmount()
             state.shopList.removeItem(id);
             ShopListView.deleteShopListItem(id);
-            HeaderView.updateCart(state.shopList.getListLength());
+            HeaderView.updateCart(state.shopList.getOrderTotalAmount());
         }
-
     }
 
-    // console.log("L176 index shopListController order-actions__close => ", target);
     if(target.matches(".order-actions__close, .order-actions__close *")){
         //close shopping list
         ShopListView.toggleShopList(state.shopList.getItems());
+    }
+
+    // Adding book amounts
+    if(target.matches(".order-list__item-amount-value")){
+        console.log("L188 index amount changed => ", target.value);
+        HeaderView.updateCart(state.shopList.getOrderTotalAmount());
+        ShopListView.renderOrderTotalPrice(state.shopList.getOrderTotalPrice());
     }
 }
 
