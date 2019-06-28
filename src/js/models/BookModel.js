@@ -29,11 +29,11 @@ export default class BookModel {
             // Utils.logOutput("L29 BookModel => ", book);
 
             if(book.status === 200){
-                this.title = book.data.volumeInfo.title ;
-                this.authors = book.data.volumeInfo.authors ;
-                this.averageRating = book.data.volumeInfo.averageRating ;
-                this.industryIdentifiers = book.data.volumeInfo.industryIdentifiers ;
-                this.description = book.data.volumeInfo.description ;
+                this.title = book.data.volumeInfo.title;
+                this.authors = book.data.volumeInfo.authors;
+                this.averageRating = book.data.volumeInfo.averageRating;
+                this.industryIdentifiers = book.data.volumeInfo.industryIdentifiers;
+                this.description = book.data.volumeInfo.description ? book.data.volumeInfo.description : "Seller Did Not Provide Any Description For This Book";
                 this.thumbnailSmall = book.data.volumeInfo.imageLinks.small;
                 this.thumbnailMedium = book.data.volumeInfo.imageLinks.medium;
                 this.thumbnailLarge = book.data.volumeInfo.imageLinks.large;

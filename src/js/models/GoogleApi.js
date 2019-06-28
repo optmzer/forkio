@@ -13,7 +13,7 @@
  * https://www.googleapis.com/books/v1/volumes/${volumeId}
  * returns JSON with a single book.
  */
-export const VOLUMES = "https://www.googleapis.com/books/v1/volumes";
+export const VOLUMES = "https://cors-anywhere.herokuapp.com/https://www.googleapis.com/books/v1/volumes";
 
 
 /**

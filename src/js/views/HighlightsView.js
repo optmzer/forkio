@@ -16,7 +16,7 @@ const buildBookHighlights = (book) => {
         </figure>
         <div class="hlts-meta">
             <div class="hlts-meta__title">
-                <h2 class="">${title}</h2>
+                <div>${createMultipartTitle(title)}</div>
             </div>
             <h3 class="hlts-meta__director">by ${authors}</h3>
             <p class="hlts-meta__release-date">Publisher: ${book.publisher}</p>
@@ -33,4 +33,37 @@ const buildBookHighlights = (book) => {
 
 export const renderBookHighlights = (book) => {
     Base.elements.bookHighlights.insertAdjacentHTML("afterbegin", buildBookHighlights(book));
+}
+
+const splitTitle = (title, length) => {
+    let words = title.split(" ");
+
+    let titleParts = [];
+    let part = "";
+    for(let i = 0; i < words.length; ++i) {
+        // part += words[i] + " ";
+        if((part.length + words[i].length) <= length) {
+            part += words[i] + " ";
+        } else {
+            part.trimRight();
+            titleParts.push(part);
+            part = words[i] + " ";
+        }
+    }
+    // Add final part
+    part.trimRight();
+    titleParts.push(part);
+
+    return titleParts;
+}
+
+const createMultipartTitle = (title, length = 28) => {
+    let output = `<h2>${title}</h2>`;
+    if(title.length > length){
+        output = ""; // Create multipart title
+        for (const part of splitTitle(title, length)) {
+            output += `<h2>${part}</h2>`;
+        }
+    }
+    return output;
 }
